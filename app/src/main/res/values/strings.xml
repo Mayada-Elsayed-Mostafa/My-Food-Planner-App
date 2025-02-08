@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">My Food Planner Application</string>
+    <string name="app_name">MayYummy</string>
+    <string name="welcomeBack">Welcome back</string>
+    <string name="loginToYourAccount">Login to your account</string>
+    <string name="enterEmailOrPhone">Enter email or phone</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">"Forgot Password ? "</string>
+    <string name="login">Log In</string>
+    <string name="or">OR</string>
+    <string name="donothaveanAccount">"Don’t have an Account? "</string>
+    <string name="createAccount">Create Account</string>
+    <string name="register">Register</string>
+    <string name="createYourNewAccount">Create your new account</string>
+    <string name="enterYourName">Enter your Name</string>
+    <string name="enterYourEmail">Enter your Email</string>
+    <string name="enterYourPhone">Enter your Phone</string>
+    <string name="enterYourPassword">Enter your Password</string>
+    <string name="terms"><![CDATA[By signing up you agree to our Terms & Conditions and Privacy Policy]]></string>
+    <string name="signUp">Sign Up</string>
+    <string name="mayYummy">MayYummy</string>
+    <string name="solgan">MayYummy – Your smart meal planner.\nPlan your meals, enjoy every bite</string>
+    <string name="haveAnAccount">Already have an account?</string>
 </resources>
