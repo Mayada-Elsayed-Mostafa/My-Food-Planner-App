@@ -20,7 +20,7 @@
             android:id="@+id/tv_title_inspirationMeal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Meal day" />
+            android:text="@string/handpickedforYou" />
 
         <TextView
             android:id="@+id/tv_name_meal"

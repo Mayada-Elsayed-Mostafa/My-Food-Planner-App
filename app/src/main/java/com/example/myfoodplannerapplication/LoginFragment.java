@@ -1,8 +1,6 @@
 package com.example.myfoodplannerapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,11 +62,9 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.d("loginTag", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment2);
                             } else {
-                                Log.w("loginTag", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -76,8 +72,8 @@ public class LoginFragment extends Fragment {
         });
 
         createAnAccount.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), SignupFragment.class);
-            startActivity(intent);
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signupFragment);
+
         });
 
         return view;

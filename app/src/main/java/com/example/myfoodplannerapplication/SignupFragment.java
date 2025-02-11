@@ -1,6 +1,5 @@
 package com.example.myfoodplannerapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,7 +95,6 @@ public class SignupFragment extends Fragment {
                                             });
                                     Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_homeFragment);
                                 } else {
-                                    Log.w("signupTag", "createUserWithEmail:failure", task.getException());
                                     Toast.makeText(requireContext(), "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
