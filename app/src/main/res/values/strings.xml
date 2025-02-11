@@ -20,4 +20,6 @@
     <string name="mayYummy">MayYummy</string>
     <string name="solgan">MayYummy – Your smart meal planner.\nPlan your meals, enjoy every bite</string>
     <string name="haveAnAccount">Already have an account?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

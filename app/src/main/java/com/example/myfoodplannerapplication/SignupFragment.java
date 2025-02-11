@@ -1,13 +1,18 @@
 package com.example.myfoodplannerapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,32 +22,34 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-
-public class SignupActivity extends AppCompatActivity {
+public class SignupFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-    FirebaseUser user;
+    private FirebaseUser user;
 
-    TextView name;
-    TextView email;
-    TextView phone;
-    TextView password;
-    Button signUp;
+    private TextView name;
+    private TextView email;
+    private TextView phone;
+    private TextView password;
+    private Button signUp;
+
+    public SignupFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_signup, container, false);
         mAuth = FirebaseAuth.getInstance();
 
-        name = findViewById(R.id.et_name);
-        email = findViewById(R.id.et_email);
-        phone = findViewById(R.id.et_phone);
-        password = findViewById(R.id.et_password);
-        signUp = findViewById(R.id.btn_signUp);
+        name = view.findViewById(R.id.et_name);
+        email = view.findViewById(R.id.et_email);
+        phone = view.findViewById(R.id.et_phone);
+        password = view.findViewById(R.id.et_password);
+        signUp = view.findViewById(R.id.btn_signUp);
 
-        signUp.setOnClickListener(view -> {
-
+        signUp.setOnClickListener(view1 -> {
             user = FirebaseAuth.getInstance().getCurrentUser();
 
             String emailEntered = email.getText().toString();
@@ -56,7 +63,7 @@ public class SignupActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 boolean isEmailExists = !task.getResult().getSignInMethods().isEmpty();
                                 if (isEmailExists) {
-                                    email.setError("This Email Exits Already");
+                                    email.setError("This Email Exists Already");
                                     email.requestFocus();
                                 }
                             }
@@ -64,12 +71,11 @@ public class SignupActivity extends AppCompatActivity {
                     });
 
             if (passwordEntered.length() < 6) {
-                Toast.makeText(SignupActivity.this, "Sorry, Enter at least 6 characters for password.",
+                Toast.makeText(requireContext(), "Sorry, Enter at least 6 characters for password.",
                         Toast.LENGTH_SHORT).show();
-
             } else {
                 mAuth.createUserWithEmailAndPassword(emailEntered, passwordEntered)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -88,18 +94,17 @@ public class SignupActivity extends AppCompatActivity {
                                                     }
                                                 }
                                             });
+                                    Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_homeFragment);
                                 } else {
-
                                     Log.w("signupTag", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(SignupActivity.this, "Authentication failed.",
+                                    Toast.makeText(requireContext(), "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
             }
-
         });
 
-
+        return view;
     }
 }
