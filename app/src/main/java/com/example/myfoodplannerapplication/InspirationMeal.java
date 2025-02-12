@@ -1,10 +1,12 @@
 package com.example.myfoodplannerapplication;
 
-public class InspirationMeal {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class InspirationMeal implements Parcelable {
 
     private String strMeal;
     private String strMealThumb;
-
     private String idMeal;
     private String strCategory;
     private String strArea;
@@ -31,12 +33,90 @@ public class InspirationMeal {
     private String strIngredient19;
     private String strIngredient20;
 
-
     public InspirationMeal(String strMealThumb, String strMeal) {
         this.strMealThumb = strMealThumb;
         this.strMeal = strMeal;
     }
 
+    protected InspirationMeal(Parcel in) {
+        strMeal = in.readString();
+        strMealThumb = in.readString();
+        idMeal = in.readString();
+        strCategory = in.readString();
+        strArea = in.readString();
+        strInstructions = in.readString();
+        strYoutube = in.readString();
+        strIngredient1 = in.readString();
+        strIngredient2 = in.readString();
+        strIngredient3 = in.readString();
+        strIngredient4 = in.readString();
+        strIngredient5 = in.readString();
+        strIngredient6 = in.readString();
+        strIngredient7 = in.readString();
+        strIngredient8 = in.readString();
+        strIngredient9 = in.readString();
+        strIngredient10 = in.readString();
+        strIngredient11 = in.readString();
+        strIngredient12 = in.readString();
+        strIngredient13 = in.readString();
+        strIngredient14 = in.readString();
+        strIngredient15 = in.readString();
+        strIngredient16 = in.readString();
+        strIngredient17 = in.readString();
+        strIngredient18 = in.readString();
+        strIngredient19 = in.readString();
+        strIngredient20 = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(strMeal);
+        dest.writeString(strMealThumb);
+        dest.writeString(idMeal);
+        dest.writeString(strCategory);
+        dest.writeString(strArea);
+        dest.writeString(strInstructions);
+        dest.writeString(strYoutube);
+        dest.writeString(strIngredient1);
+        dest.writeString(strIngredient2);
+        dest.writeString(strIngredient3);
+        dest.writeString(strIngredient4);
+        dest.writeString(strIngredient5);
+        dest.writeString(strIngredient6);
+        dest.writeString(strIngredient7);
+        dest.writeString(strIngredient8);
+        dest.writeString(strIngredient9);
+        dest.writeString(strIngredient10);
+        dest.writeString(strIngredient11);
+        dest.writeString(strIngredient12);
+        dest.writeString(strIngredient13);
+        dest.writeString(strIngredient14);
+        dest.writeString(strIngredient15);
+        dest.writeString(strIngredient16);
+        dest.writeString(strIngredient17);
+        dest.writeString(strIngredient18);
+        dest.writeString(strIngredient19);
+        dest.writeString(strIngredient20);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<InspirationMeal> CREATOR = new Creator<InspirationMeal>() {
+        @Override
+        public InspirationMeal createFromParcel(Parcel in) {
+            return new InspirationMeal(in);
+        }
+
+        @Override
+        public InspirationMeal[] newArray(int size) {
+            return new InspirationMeal[size];
+        }
+    };
+
+    // Getter methods
     public String getStrMeal() {
         return strMeal;
     }

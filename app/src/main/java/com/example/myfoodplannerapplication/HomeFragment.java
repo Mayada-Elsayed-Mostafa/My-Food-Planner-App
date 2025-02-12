@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -29,6 +31,7 @@ public class HomeFragment extends Fragment {
     TextView nameOfMeal;
     ImageView imageOfMeal;
     String imageURL;
+    CardView mealCard;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +45,18 @@ public class HomeFragment extends Fragment {
         nameOfMeal = view.findViewById(R.id.tv_name_meal);
         imageOfMeal = view.findViewById(R.id.iv_meal_img);
 
+        mealCard = view.findViewById(R.id.card_meal_of_day);
+
         loadRandomMeal();
+
+        mealCard.setOnClickListener(v -> {
+            if (meals != null && !meals.isEmpty()) {
+                InspirationMeal selectedMeal = meals.get(0);
+                HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
+                Navigation.findNavController(v).navigate(action);
+            }
+        });
 
         return view;
     }
@@ -74,7 +88,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<InspirationMealResponse> call, Throwable t) {
-                // يمكنك إضافة Toast أو Log لمعرفة سبب الخطأ
             }
         });
     }
