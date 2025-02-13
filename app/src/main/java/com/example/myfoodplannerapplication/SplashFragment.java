@@ -1,5 +1,9 @@
 package com.example.myfoodplannerapplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,6 +19,7 @@ import com.airbnb.lottie.LottieAnimationView;
 
 public class SplashFragment extends Fragment {
 
+    SharedPreferences preferences;
     private static final int SPLASH_DELAY = 5000;
 
     public SplashFragment() {
@@ -30,8 +35,16 @@ public class SplashFragment extends Fragment {
         lottieAnimationView.setAnimation(R.raw.splash_animation);
         lottieAnimationView.playAnimation();
 
-        new Handler().postDelayed(() ->
-                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment), SPLASH_DELAY);
+        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+        boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            new Handler().postDelayed(() ->
+                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_homeFragment), SPLASH_DELAY);
+        } else {
+            new Handler().postDelayed(() ->
+                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment), SPLASH_DELAY);
+        }
 
         return view;
     }

@@ -60,7 +60,7 @@ public class WelcomeFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Navigation.findNavController(v).navigate(R.id.action_welcomeFragment_to_homeFragment);
+                                Navigation.findNavController(requireView()).navigate(R.id.action_welcomeFragment_to_homeFragment);
                             } else {
                                 Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }

@@ -1,5 +1,8 @@
 package com.example.myfoodplannerapplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +44,7 @@ public class LoginFragment extends Fragment {
         login = view.findViewById(R.id.btn_login);
         createAnAccount = view.findViewById(R.id.tv_createAccount);
 
+
         login.setOnClickListener(v -> {
             String email = enterEmail.getText().toString();
             String password = enterPassword.getText().toString();
@@ -63,6 +67,7 @@ public class LoginFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
+
                                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment2);
                             } else {
                                 Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
