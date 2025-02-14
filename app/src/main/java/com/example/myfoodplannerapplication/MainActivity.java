@@ -12,9 +12,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
@@ -34,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setVisibility(View.VISIBLE);
             } else {
                 toolbar.setVisibility(View.GONE);
+            }
+        });
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.homeFragment || destination.getId() == R.id.addFragment || destination.getId() == R.id.favoriteFragment || destination.getId() == R.id.calenderFragment || destination.getId() == R.id.profileFragment) {
+                bottomNavigationView.setVisibility(View.VISIBLE);
+            } else {
+                bottomNavigationView.setVisibility(View.GONE);
             }
         });
     }
