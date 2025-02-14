@@ -23,19 +23,65 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@id/cor_layout"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/nav_graph" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cor_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_80sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment">
+
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            app:fabCradleMargin="@dimen/_12sdp"
+            app:fabCradleRoundedCornerRadius="@dimen/_70sdp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="0dp"
+                app:itemIconSize="@dimen/_28sdp"
+                app:itemIconTint="@color/my_light_primary"
+                app:itemTextColor="@color/my_light_secondary"
+                app:labelVisibilityMode="selected"
+                app:menu="@menu/bottom_navigation_menu" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_margin="@dimen/_14sdp"
+            android:backgroundTint="@color/my_light_primary"
+            android:src="@drawable/ic_add"
+            app:fabCradleMargin="@dimen/_10sdp"
+            app:fabCradleRoundedCornerRadius="@dimen/_60sdp"
+            app:fabSize="normal"
+            app:layout_anchorGravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/cor_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cor_layout"
+            app:layout_constraintVertical_bias="0.5"
+            app:maxImageSize="@dimen/_50sdp"
+            app:shapeAppearanceOverlay="@style/FABShape"
+            app:tint="@color/white" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
