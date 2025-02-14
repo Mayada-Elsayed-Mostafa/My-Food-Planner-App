@@ -25,4 +25,7 @@
     <string name="handpickedforYou">Handpicked for You</string>
     <string name="skip">Skip</string>
     <string name="logout">Logout</string>
+    <string name="seeYourFavouritesMeals">See Your Favourites Meals</string>
+    <string name="see">See</string>
+    <string name="seeYourPlanMeals">See Your Plan Meals</string>
 </resources>

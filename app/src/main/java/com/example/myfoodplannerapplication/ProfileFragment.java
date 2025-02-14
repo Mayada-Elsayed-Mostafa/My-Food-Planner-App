@@ -17,7 +17,7 @@ import androidx.navigation.Navigation;
 public class ProfileFragment extends Fragment {
 
     SharedPreferences preferences;
-    Button logout;
+    Button logout, seePlan, seeFav;
     TextView userName;
 
     public ProfileFragment() {
@@ -37,9 +37,11 @@ public class ProfileFragment extends Fragment {
 
         preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
         logout = view.findViewById(R.id.btn_logout);
+        seePlan = view.findViewById(R.id.btn_see_plan);
+        seeFav = view.findViewById(R.id.btn_see_fav);
         userName = view.findViewById(R.id.tv_userNameProfile);
 
-        userName.setText(preferences.getString("name",""));
+        userName.setText(preferences.getString("name", ""));
 
         logout.setOnClickListener(v -> {
             SharedPreferences.Editor editor = preferences.edit();
@@ -50,6 +52,15 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_welcomeFragment);
 
         });
+
+        seePlan.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_calenderFragment);
+        });
+
+        seeFav.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_favoriteFragment);
+        });
+
         return view;
     }
 }
