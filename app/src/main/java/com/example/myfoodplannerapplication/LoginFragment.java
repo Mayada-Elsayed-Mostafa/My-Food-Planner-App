@@ -1,8 +1,5 @@
 package com.example.myfoodplannerapplication;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +35,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        enterEmail = view.findViewById(R.id.et_enterEmail);
-        enterPassword = view.findViewById(R.id.et_enterPassword);
+        enterEmail = view.findViewById(R.id.et_enterEmail_val);
+        enterPassword = view.findViewById(R.id.et_enterPassword_val);
         forgotPassword = view.findViewById(R.id.tv_forgotPassword);
         login = view.findViewById(R.id.btn_login);
         createAnAccount = view.findViewById(R.id.tv_createAccount);

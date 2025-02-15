@@ -30,6 +30,7 @@ public class SignupFragment extends Fragment {
     private TextInputEditText phone;
     private TextInputEditText password;
     private Button signUp;
+    private TextView login;
     SharedPreferences preferences;
 
     public SignupFragment() {
@@ -47,6 +48,7 @@ public class SignupFragment extends Fragment {
         phone = view.findViewById(R.id.et_phone_val);
         password = view.findViewById(R.id.et_password_val);
         signUp = view.findViewById(R.id.btn_signUp);
+        login = view.findViewById(R.id.tv_login);
 
         preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
 
@@ -71,6 +73,10 @@ public class SignupFragment extends Fragment {
                     registerUser(emailEntered, passwordEntered, nameEntered, view);
                 }
             });
+        });
+
+        login.setOnClickListener(view1 -> {
+            Navigation.findNavController(view).navigate(R.id.action_signupFragment_to_loginFragment);
         });
 
         return view;
