@@ -28,4 +28,7 @@
     <string name="seeYourFavouritesMeals">See Your Favourites Meals</string>
     <string name="see">See</string>
     <string name="seeYourPlanMeals">See Your Plan Meals</string>
+    <string name="searchbyingredients">Search by Ingredients</string>
+    <string name="searchbycategories">Search by Categories</string>
+    <string name="searchbycountry">Search by Country</string>
 </resources>
