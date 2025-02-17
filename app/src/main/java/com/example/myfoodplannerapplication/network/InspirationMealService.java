@@ -1,4 +1,6 @@
-package com.example.myfoodplannerapplication;
+package com.example.myfoodplannerapplication.network;
+
+import com.example.myfoodplannerapplication.model.InspirationMealResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

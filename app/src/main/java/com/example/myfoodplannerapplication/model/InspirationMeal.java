@@ -1,9 +1,27 @@
-package com.example.myfoodplannerapplication;
+package com.example.myfoodplannerapplication.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "mealtable")
 public class InspirationMeal implements Parcelable {
+
+    @PrimaryKey
+    @NonNull
+    private Long id;
+
+    @NonNull
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@NonNull Long id) {
+        this.id = id;
+    }
 
     private String strMeal;
     private String strMealThumb;
@@ -116,7 +134,6 @@ public class InspirationMeal implements Parcelable {
         }
     };
 
-    // Getter methods
     public String getStrMeal() {
         return strMeal;
     }
@@ -195,6 +212,114 @@ public class InspirationMeal implements Parcelable {
 
     public String getStrIngredient13() {
         return strIngredient13;
+    }
+
+    public void setStrMeal(String strMeal) {
+        this.strMeal = strMeal;
+    }
+
+    public void setStrMealThumb(String strMealThumb) {
+        this.strMealThumb = strMealThumb;
+    }
+
+    public void setIdMeal(String idMeal) {
+        this.idMeal = idMeal;
+    }
+
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
+    }
+
+    public void setStrArea(String strArea) {
+        this.strArea = strArea;
+    }
+
+    public void setStrInstructions(String strInstructions) {
+        this.strInstructions = strInstructions;
+    }
+
+    public void setStrYoutube(String strYoutube) {
+        this.strYoutube = strYoutube;
+    }
+
+    public void setStrIngredient1(String strIngredient1) {
+        this.strIngredient1 = strIngredient1;
+    }
+
+    public void setStrIngredient2(String strIngredient2) {
+        this.strIngredient2 = strIngredient2;
+    }
+
+    public void setStrIngredient3(String strIngredient3) {
+        this.strIngredient3 = strIngredient3;
+    }
+
+    public void setStrIngredient4(String strIngredient4) {
+        this.strIngredient4 = strIngredient4;
+    }
+
+    public void setStrIngredient5(String strIngredient5) {
+        this.strIngredient5 = strIngredient5;
+    }
+
+    public void setStrIngredient6(String strIngredient6) {
+        this.strIngredient6 = strIngredient6;
+    }
+
+    public void setStrIngredient7(String strIngredient7) {
+        this.strIngredient7 = strIngredient7;
+    }
+
+    public void setStrIngredient8(String strIngredient8) {
+        this.strIngredient8 = strIngredient8;
+    }
+
+    public void setStrIngredient9(String strIngredient9) {
+        this.strIngredient9 = strIngredient9;
+    }
+
+    public void setStrIngredient10(String strIngredient10) {
+        this.strIngredient10 = strIngredient10;
+    }
+
+    public void setStrIngredient11(String strIngredient11) {
+        this.strIngredient11 = strIngredient11;
+    }
+
+    public void setStrIngredient12(String strIngredient12) {
+        this.strIngredient12 = strIngredient12;
+    }
+
+    public void setStrIngredient13(String strIngredient13) {
+        this.strIngredient13 = strIngredient13;
+    }
+
+    public void setStrIngredient14(String strIngredient14) {
+        this.strIngredient14 = strIngredient14;
+    }
+
+    public void setStrIngredient15(String strIngredient15) {
+        this.strIngredient15 = strIngredient15;
+    }
+
+    public void setStrIngredient16(String strIngredient16) {
+        this.strIngredient16 = strIngredient16;
+    }
+
+    public void setStrIngredient17(String strIngredient17) {
+        this.strIngredient17 = strIngredient17;
+    }
+
+    public void setStrIngredient18(String strIngredient18) {
+        this.strIngredient18 = strIngredient18;
+    }
+
+    public void setStrIngredient19(String strIngredient19) {
+        this.strIngredient19 = strIngredient19;
+    }
+
+    public void setStrIngredient20(String strIngredient20) {
+        this.strIngredient20 = strIngredient20;
     }
 
     public String getStrIngredient14() {

@@ -15,6 +15,9 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
+import com.example.myfoodplannerapplication.model.InspirationMealResponse;
+import com.example.myfoodplannerapplication.network.InspirationMealService;
 
 import java.util.List;
 
@@ -68,6 +71,7 @@ public class HomeFragment extends Fragment {
                 .build();
 
         InspirationMealService mealService = retrofit.create(InspirationMealService.class);
+
         Call<InspirationMealResponse> call = mealService.getMeals();
 
         call.enqueue(new Callback<InspirationMealResponse>() {

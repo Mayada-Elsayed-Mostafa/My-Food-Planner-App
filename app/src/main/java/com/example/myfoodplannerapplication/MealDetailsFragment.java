@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 public class MealDetailsFragment extends Fragment {
 
