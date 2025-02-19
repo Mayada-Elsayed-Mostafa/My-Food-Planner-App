@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication;
+package com.example.myfoodplannerapplication.home.view.category;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.model.Category;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapter.ViewHolder> {
 
-    private final Context context;
-    private final ArrayList<AvailableCategories> categories;
+    private Context context;
+    private List<Category> categories;
 
-    public RVCategoriesAdapter(Context context, ArrayList<AvailableCategories> categories) {
+    public RVCategoriesAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
+    }
+
+    public void setList(List<Category> categoryList) {
+        this.categories = categoryList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -34,17 +41,17 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        AvailableCategories availableCategories = categories.get(position);
+        Category category = categories.get(position);
 
-        Glide.with(context)
-                .load(availableCategories.getStrCategoryThumb())
+        holder.categoryName.setText(category.getStrCategory());
+        Glide.with(holder.itemView.getContext())
+                .load(category.getStrCategoryThumb())
                 .into(holder.categoryImg);
-        holder.categoryName.setText(availableCategories.getStrCategory());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return categories.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

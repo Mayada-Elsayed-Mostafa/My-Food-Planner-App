@@ -16,7 +16,6 @@ public class MealRemoteDataSource {
     private InspirationMealService inspirationMealService;
     private static MealRemoteDataSource remoteDataSource = null;
 
-
     public MealRemoteDataSource() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(SINGLE_RANDOM_MEAL_URL)

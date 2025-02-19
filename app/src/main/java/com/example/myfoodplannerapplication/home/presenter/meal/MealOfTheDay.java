@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication.mealoftheday.presenter;
+package com.example.myfoodplannerapplication.home.presenter.meal;
 
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 

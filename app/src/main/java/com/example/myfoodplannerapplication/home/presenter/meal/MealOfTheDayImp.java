@@ -1,8 +1,8 @@
-package com.example.myfoodplannerapplication.mealoftheday.presenter;
+package com.example.myfoodplannerapplication.home.presenter.meal;
 
 import android.util.Log;
 
-import com.example.myfoodplannerapplication.mealoftheday.view.MealOfTheDayView;
+import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayView;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.network.NetworkCallback;

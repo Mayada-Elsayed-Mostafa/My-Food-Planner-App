@@ -1,13 +1,12 @@
 package com.example.myfoodplannerapplication.network;
 
 import com.example.myfoodplannerapplication.model.Category;
-import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.List;
 
-public interface NetworkCallback {
+public interface CategoryNetworkCallback {
 
-    void onSuccess(List<InspirationMeal> inspirationMeals);
+    void onSuccess(List<Category> categoryList);
 
     void onFailure(String errorMessage);
 }

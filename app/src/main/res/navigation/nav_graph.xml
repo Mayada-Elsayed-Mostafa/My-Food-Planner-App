@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.myfoodplannerapplication.mealoftheday.view.HomeFragment"
+        android:name="com.example.myfoodplannerapplication.home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
 
@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment2"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
 
     </fragment>
     <fragment
@@ -129,7 +132,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.myfoodplannerapplication.FavoriteFragment"
+        android:name="com.example.myfoodplannerapplication.favoritemeals.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -138,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.myfoodplannerapplication.SearchFragment"
+        android:name="com.example.myfoodplannerapplication.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action

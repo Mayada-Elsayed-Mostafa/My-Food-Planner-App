@@ -9,5 +9,4 @@ public interface InspirationMealService {
 
     @GET("random.php")
     Call<InspirationMealResponse> getMeals();
-
 }
