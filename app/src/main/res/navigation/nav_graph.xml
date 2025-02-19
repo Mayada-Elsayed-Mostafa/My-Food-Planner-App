@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealDetailsFragment"
-        android:name="com.example.myfoodplannerapplication.MealDetailsFragment"
+        android:name="com.example.myfoodplannerapplication.details.view.MealDetailsFragment"
         android:label="fragment_meal_details"
         tools:layout="@layout/fragment_meal_details">
 
@@ -118,12 +118,12 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.myfoodplannerapplication.AddFragment"
+        android:name="com.example.myfoodplannerapplication.add.view.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/calenderFragment"
-        android:name="com.example.myfoodplannerapplication.CalenderFragment"
+        android:name="com.example.myfoodplannerapplication.calender.view.CalenderFragment"
         android:label="fragment_calender"
         tools:layout="@layout/fragment_calender" >
         <action

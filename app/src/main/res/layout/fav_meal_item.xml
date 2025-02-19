@@ -10,7 +10,7 @@
     android:padding="@dimen/_7sdp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/meal_iv"
+        android:id="@+id/fav_meal_iv"
         android:layout_width="@dimen/_130sdp"
         android:layout_height="@dimen/_130sdp"
         android:layout_gravity="center_horizontal"
@@ -18,7 +18,7 @@
 
 
     <TextView
-        android:id="@+id/title_tv"
+        android:id="@+id/fav_title_tv"
         style="@style/TitleTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,5 +27,12 @@
         android:gravity="center"
         android:text="Title"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_remove"
+        android:text="Remove"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

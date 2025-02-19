@@ -8,10 +8,12 @@ import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public class MealLocalDataSource {
 
     private MealDao mealDao;
-    private LiveData<List<InspirationMeal>> inspirationMeals;
+    private Flowable<List<InspirationMeal>> inspirationMeals;
     private static MealLocalDataSource LocalDataSource = null;
 
     private MealLocalDataSource(Context context) {
@@ -28,7 +30,7 @@ public class MealLocalDataSource {
         return LocalDataSource;
     }
 
-    public LiveData<List<InspirationMeal>> getData() {
+    public Flowable<List<InspirationMeal>> getData() {
         return inspirationMeals;
     }
 

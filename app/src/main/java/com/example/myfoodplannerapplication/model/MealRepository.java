@@ -8,6 +8,8 @@ import com.example.myfoodplannerapplication.network.NetworkCallback;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public class MealRepository {
 
     private static MealRepository mealRepository = null;
@@ -27,7 +29,7 @@ public class MealRepository {
         return mealRepository;
     }
 
-    public LiveData<List<InspirationMeal>> getAllData() {
+    public Flowable<List<InspirationMeal>> getAllData() {
         return mealLocalDataSource.getData();
     }
 

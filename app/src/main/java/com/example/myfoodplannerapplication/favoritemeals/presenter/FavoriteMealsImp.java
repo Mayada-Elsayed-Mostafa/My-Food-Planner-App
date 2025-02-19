@@ -8,6 +8,8 @@ import com.example.myfoodplannerapplication.model.MealRepository;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public class FavoriteMealsImp implements FavoriteMeals {
 
     MealRepository mealRepository;
@@ -18,7 +20,7 @@ public class FavoriteMealsImp implements FavoriteMeals {
         this.favoriteFragment = _favoriteFragment;
     }
 
-    public LiveData<List<InspirationMeal>> getFavMeals() {
+    public Flowable<List<InspirationMeal>> getFavMeals() {
         return mealRepository.getAllData();
     }
 

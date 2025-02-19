@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication;
+package com.example.myfoodplannerapplication.add.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.myfoodplannerapplication.R;
 
-public class CalenderFragment extends Fragment {
+public class AddFragment extends Fragment {
 
 
-    public CalenderFragment() {
+    public AddFragment() {
         // Required empty public constructor
     }
 
@@ -19,13 +20,12 @@ public class CalenderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calender, container, false);
+        return inflater.inflate(R.layout.fragment_add, container, false);
     }
 }

@@ -1,22 +1,30 @@
-package com.example.myfoodplannerapplication;
+package com.example.myfoodplannerapplication.details.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.details.presenter.MealDetailsImp;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 
-public class MealDetailsFragment extends Fragment {
+import java.util.List;
+
+public class MealDetailsFragment extends Fragment implements OnMealDetailsClickListener, MealDetailsView {
 
     TextView mealNameTV;
     TextView mealInstructionsTV;
     ImageView mealIMG;
+    Button addToFav;
+    MealDetailsImp mealDetailsImp;
+
 
     public MealDetailsFragment() {
         // Required empty public constructor
@@ -31,6 +39,8 @@ public class MealDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_details, container, false);
+
+        addToFav = view.findViewById(R.id.btn_to_fav);
 
         InspirationMeal meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
 
@@ -51,6 +61,25 @@ public class MealDetailsFragment extends Fragment {
                 .load(mealImage)
                 .into(mealIMG);
 
+        addToFav.setOnClickListener(view1 -> {
+
+        });
         return view;
+    }
+
+
+    @Override
+    public void setData(List<InspirationMeal> inspirationMealList) {
+
+    }
+
+    @Override
+    public void showErrMsg(String err) {
+
+    }
+
+    @Override
+    public void onAddMealDetailsClicked(InspirationMeal inspirationMeal) {
+        mealDetailsImp.addToFav(inspirationMeal);
     }
 }

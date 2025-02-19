@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +41,7 @@ public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.meal_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fav_meal_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -59,6 +60,9 @@ public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.Vi
                         HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
                 Navigation.findNavController(v).navigate(action);
             });
+            holder.remove.setOnClickListener(view -> {
+                listener.onFavMealClicked(meal);
+            });
         }
     }
 
@@ -70,11 +74,13 @@ public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mealIV;
         TextView titleTV;
+        Button remove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealIV = itemView.findViewById(R.id.meal_iv);
-            titleTV = itemView.findViewById(R.id.title_tv);
+            mealIV = itemView.findViewById(R.id.fav_meal_iv);
+            titleTV = itemView.findViewById(R.id.fav_title_tv);
+            remove = itemView.findViewById(R.id.btn_remove);
         }
     }
 }
