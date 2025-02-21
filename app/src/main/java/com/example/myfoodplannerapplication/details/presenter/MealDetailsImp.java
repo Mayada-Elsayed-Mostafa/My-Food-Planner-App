@@ -16,6 +16,6 @@ public class MealDetailsImp implements MealDetails {
 
     @Override
     public void addToFav(InspirationMeal inspirationMeal) {
-
+        mealRepository.insert(inspirationMeal);
     }
 }

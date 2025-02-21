@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.home.view.HomeFragment;
 import com.example.myfoodplannerapplication.home.view.HomeFragmentDirections;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 
@@ -39,7 +40,7 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.meal_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.card_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,12 +53,17 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
                     .load(meal.getStrMealThumb())
                     .into(holder.mealIV);
             holder.titleTV.setText(meal.getStrMeal());
+//            holder.mealIV.setOnClickListener(v->{
+//                InspirationMeal selectedMeal = meal;
+//                HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
+//                        HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
+//                Navigation.findNavController(v).navigate(action);
+//            });
+
             holder.mealIV.setOnClickListener(v->{
-                InspirationMeal selectedMeal = meal;
-                HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
-                        HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
-                Navigation.findNavController(v).navigate(action);
+                listener.onAddMealClicked(meal);
             });
+
         }
 
     }

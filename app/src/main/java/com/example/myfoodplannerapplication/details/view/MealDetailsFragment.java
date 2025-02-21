@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.details.presenter.MealDetailsImp;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
+import com.example.myfoodplannerapplication.model.MealRepository;
+import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
 import java.util.List;
 
@@ -40,6 +43,9 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_details, container, false);
 
+        mealDetailsImp = new MealDetailsImp(
+                MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
+
         addToFav = view.findViewById(R.id.btn_to_fav);
 
         InspirationMeal meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
@@ -61,9 +67,8 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
                 .load(mealImage)
                 .into(mealIMG);
 
-        addToFav.setOnClickListener(view1 -> {
+        addToFav.setOnClickListener(v -> onAddMealDetailsClicked(meal));
 
-        });
         return view;
     }
 

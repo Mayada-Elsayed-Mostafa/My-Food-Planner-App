@@ -75,4 +75,7 @@ dependencies {
     implementation("androidx.room:room-rxjava3:2.6.1")
 
     implementation("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
 }

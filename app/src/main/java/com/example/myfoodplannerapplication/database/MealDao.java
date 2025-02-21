@@ -10,13 +10,13 @@ import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 @Dao
 public interface MealDao {
 
     @Query("SELECT * FROM mealtable")
-    Flowable<List<InspirationMeal>> getFavoriteMeals();
+    Observable<List<InspirationMeal>> getFavoriteMeals();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(InspirationMeal product);

@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication.home.view.category;
+package com.example.myfoodplannerapplication.search.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,24 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.model.Category;
+import com.example.myfoodplannerapplication.model.Country;
 
 import java.util.List;
 
-public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapter.ViewHolder> {
+public class RVCountryAdapter extends RecyclerView.Adapter<RVCountryAdapter.ViewHolder> {
 
     private Context context;
-    private List<Category> categories;
+    List<Country> countries;
 
-    public RVCategoriesAdapter(Context context, List<Category> categories) {
-        this.context = context;
-        this.categories = categories;
+    public RVCountryAdapter(Context _context, List<Country> _countries) {
+        this.context = _context;
+        this.countries = _countries;
     }
 
-    public void setList(List<Category> categoryList) {
-        this.categories = categoryList;
+    public void setList(List<Country> countryList) {
+        this.countries = countryList;
         notifyDataSetChanged();
     }
 
@@ -35,35 +35,45 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.available_category_item, parent, false);
-        return new ViewHolder(view);
+        return new RVCountryAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Category category = categories.get(position);
+        Country country = countries.get(position);
 
-        holder.categoryName.setText(category.getStrCategory());
+        holder.categoryName.setText(country.getStrArea());
 //        Glide.with(holder.itemView.getContext())
-//                .load(category.getStrCategoryThumb())
+//                .load(country.getStrCategoryThumb())
 //                .into(holder.categoryImg);
+//
+//        Log.d("RVCategoriesAdapter", "Loading image for category: " + category.getStrCategoryThumb());
+
+    }
+
+    public void updateList(List<Country> newList) {
+        this.countries = newList;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return countries.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        //ImageView categoryImg;
+        //ImageView countryIMg;
         TextView categoryName;
 
         public ViewHolder(@NonNull View itemView) {
+
             super(itemView);
 
-            //categoryImg = itemView.findViewById(R.id.iv_category_img);
+            //countryIMg = itemView.findViewById(R.id.iv_category_img);
             categoryName = itemView.findViewById(R.id.tv_category_name);
 
         }
     }
+
 }

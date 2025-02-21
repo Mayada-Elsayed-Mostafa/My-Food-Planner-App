@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp">
+
+            <ImageView
+                android:id="@+id/meal_iv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="bottom"
+                android:alpha="0.3"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

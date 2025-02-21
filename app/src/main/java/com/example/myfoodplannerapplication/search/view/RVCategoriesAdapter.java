@@ -1,6 +1,7 @@
-package com.example.myfoodplannerapplication.home.view.category;
+package com.example.myfoodplannerapplication.search.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,17 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
         Category category = categories.get(position);
 
         holder.categoryName.setText(category.getStrCategory());
-//        Glide.with(holder.itemView.getContext())
-//                .load(category.getStrCategoryThumb())
-//                .into(holder.categoryImg);
+        Glide.with(holder.itemView.getContext())
+                .load(category.getStrCategoryThumb())
+                .into(holder.categoryImg);
+
+        Log.d("RVCategoriesAdapter", "Loading image for category: " + category.getStrCategoryThumb());
+
+    }
+
+    public void updateList(List<Category> newList) {
+        this.categories = newList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -55,13 +64,13 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        //ImageView categoryImg;
+        ImageView categoryImg;
         TextView categoryName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //categoryImg = itemView.findViewById(R.id.iv_category_img);
+            categoryImg = itemView.findViewById(R.id.iv_category_img);
             categoryName = itemView.findViewById(R.id.tv_category_name);
 
         }

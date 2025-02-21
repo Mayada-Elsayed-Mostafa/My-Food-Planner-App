@@ -1,18 +1,19 @@
 package com.example.myfoodplannerapplication.home.presenter.meal;
 
-import android.util.Log;
-
 import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayView;
-import com.example.myfoodplannerapplication.model.InspirationMeal;
+import com.example.myfoodplannerapplication.model.InspirationMealResponse;
 import com.example.myfoodplannerapplication.model.MealRepository;
-import com.example.myfoodplannerapplication.network.NetworkCallback;
 
-import java.util.List;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class MealOfTheDayImp implements NetworkCallback, MealOfTheDay {
+public class MealOfTheDayImp implements MealOfTheDay {
 
     private MealRepository mealRepository;
     private MealOfTheDayView mealOfTheDayView;
+    private InspirationMealResponse inspirationMealResponse;
 
     public MealOfTheDayImp(MealRepository _mealRepository, MealOfTheDayView _mealOfTheDayView) {
         this.mealRepository = _mealRepository;
@@ -22,22 +23,25 @@ public class MealOfTheDayImp implements NetworkCallback, MealOfTheDay {
 
     @Override
     public void getMeal() {
-        mealRepository.getAllData(this);
+        mealRepository.getMealFromNetwork()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<InspirationMealResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onSuccess(InspirationMealResponse mealResponse) {
+                        mealOfTheDayView.setData(mealResponse.getMeals());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mealOfTheDayView.showErrMsg("There are an Error : " + e.getMessage());
+                    }
+                });
     }
 
-    @Override
-    public void addToFav(InspirationMeal inspirationMeal) {
-        mealRepository.insert(inspirationMeal);
-    }
 
-    @Override
-    public void onSuccess(List<InspirationMeal> inspirationMeals) {
-        Log.d("TAG", "onSuccess: " + inspirationMeals.size());
-        mealOfTheDayView.setData(inspirationMeals);
-    }
-
-    @Override
-    public void onFailure(String errorMessage) {
-
-    }
 }

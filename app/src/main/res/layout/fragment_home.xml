@@ -38,10 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Categories of available List" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>

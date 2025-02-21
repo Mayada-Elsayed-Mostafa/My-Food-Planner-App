@@ -1,14 +1,12 @@
 package com.example.myfoodplannerapplication.favoritemeals.presenter;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.myfoodplannerapplication.favoritemeals.view.FavoriteFragment;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class FavoriteMealsImp implements FavoriteMeals {
 
@@ -20,7 +18,7 @@ public class FavoriteMealsImp implements FavoriteMeals {
         this.favoriteFragment = _favoriteFragment;
     }
 
-    public Flowable<List<InspirationMeal>> getFavMeals() {
+    public Observable<List<InspirationMeal>> getFavMeals() {
         return mealRepository.getAllData();
     }
 

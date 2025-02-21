@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication.search;
+package com.example.myfoodplannerapplication.filtered.mealsFilteredByCategory.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,18 +8,14 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.myfoodplannerapplication.R;
-import com.google.android.material.search.SearchBar;
 
 
-public class SearchFragment extends Fragment {
+public class ByCategoryFragment extends Fragment {
 
 
-    SearchBar search;
-
-    public SearchFragment() {
+    public ByCategoryFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,10 +26,6 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-        search = view.findViewById(R.id.search_bar);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_by_category, container, false);
     }
 }

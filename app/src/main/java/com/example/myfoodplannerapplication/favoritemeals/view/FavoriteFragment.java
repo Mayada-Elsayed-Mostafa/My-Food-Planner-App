@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
+import com.example.myfoodplannerapplication.details.view.MealDetailsFragment;
 import com.example.myfoodplannerapplication.favoritemeals.presenter.FavoriteMealsImp;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
@@ -54,14 +55,13 @@ public class FavoriteFragment extends Fragment implements OnFavMealClickListener
         favoriteMealsImp = new FavoriteMealsImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
 
         favoriteMealsImp.getFavMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                productList -> {
-                    rvFavMealsAdapter.setList(productList);
+                mealList -> {
+                    rvFavMealsAdapter.setList(mealList);
                     rvFavMealsAdapter.notifyDataSetChanged();
                 },
                 throwable -> {
                     Log.d("TAG", "onFavMealClicked: ");
                 });
-
 
 
         return view;
@@ -81,5 +81,7 @@ public class FavoriteFragment extends Fragment implements OnFavMealClickListener
                 , throwable -> {
                     Log.d("TAG", "onFavMealClicked: ");
                 });
+
+
     }
 }

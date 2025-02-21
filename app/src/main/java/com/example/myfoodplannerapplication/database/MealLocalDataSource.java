@@ -2,18 +2,16 @@ package com.example.myfoodplannerapplication.database;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class MealLocalDataSource {
 
     private MealDao mealDao;
-    private Flowable<List<InspirationMeal>> inspirationMeals;
+    private Observable<List<InspirationMeal>> inspirationMeals;
     private static MealLocalDataSource LocalDataSource = null;
 
     private MealLocalDataSource(Context context) {
@@ -30,7 +28,7 @@ public class MealLocalDataSource {
         return LocalDataSource;
     }
 
-    public Flowable<List<InspirationMeal>> getData() {
+    public Observable<List<InspirationMeal>> getData() {
         return inspirationMeals;
     }
 

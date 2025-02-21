@@ -56,13 +56,17 @@ public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.Vi
             holder.titleTV.setText(meal.getStrMeal());
             holder.mealIV.setOnClickListener(v -> {
                 InspirationMeal selectedMeal = meal;
-                HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
-                        HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
+                FavoriteFragmentDirections.ActionFavoriteFragmentToMealDetailsFragment action =
+                        FavoriteFragmentDirections.actionFavoriteFragmentToMealDetailsFragment(selectedMeal);
                 Navigation.findNavController(v).navigate(action);
+
+
             });
             holder.remove.setOnClickListener(view -> {
                 listener.onFavMealClicked(meal);
             });
+
+
         }
     }
 
