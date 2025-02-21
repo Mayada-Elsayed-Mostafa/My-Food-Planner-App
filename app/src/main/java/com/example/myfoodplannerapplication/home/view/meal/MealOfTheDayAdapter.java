@@ -49,16 +49,11 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
 
         if (inspirationMeals != null && !inspirationMeals.isEmpty()) {
             InspirationMeal meal = inspirationMeals.get(position);
+
             Glide.with(context)
                     .load(meal.getStrMealThumb())
                     .into(holder.mealIV);
             holder.titleTV.setText(meal.getStrMeal());
-//            holder.mealIV.setOnClickListener(v->{
-//                InspirationMeal selectedMeal = meal;
-//                HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
-//                        HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(selectedMeal);
-//                Navigation.findNavController(v).navigate(action);
-//            });
 
             holder.mealIV.setOnClickListener(v->{
                 listener.onAddMealClicked(meal);

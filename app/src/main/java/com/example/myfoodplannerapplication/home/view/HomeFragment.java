@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
 
     @Override
     public void onAddMealClicked(InspirationMeal meal) {
-
         HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
                 HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(meal);
         Navigation.findNavController(getView()).navigate(action);

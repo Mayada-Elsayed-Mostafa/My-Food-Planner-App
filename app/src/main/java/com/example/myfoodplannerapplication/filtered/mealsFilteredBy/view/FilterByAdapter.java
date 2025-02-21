@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication.search.view;
+package com.example.myfoodplannerapplication.filtered.mealsFilteredBy.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,24 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
-import com.example.myfoodplannerapplication.model.Category;
+import com.example.myfoodplannerapplication.model.FilterBy;
 
 import java.util.List;
 
-public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapter.ViewHolder> {
-
+public class FilterByAdapter extends RecyclerView.Adapter<FilterByAdapter.ViewHolder> {
     private Context context;
-    private List<Category> categories;
-    private OnSearchClickListener listener;
+    private List<FilterBy> filterByList;
 
-    public RVCategoriesAdapter(Context context, List<Category> categories, OnSearchClickListener _listener) {
+    public FilterByAdapter(Context context, List<FilterBy> _filterByList) {
         this.context = context;
-        this.categories = categories;
-        this.listener = _listener;
+        this.filterByList = _filterByList;
     }
 
-    public void setList(List<Category> categoryList) {
-        this.categories = categoryList;
+    public void setList(List<FilterBy> _filterByList) {
+        this.filterByList = _filterByList;
+        notifyDataSetChanged();
+    }
+
+    public void updateList(List<FilterBy> newList) {
+        this.filterByList = newList;
         notifyDataSetChanged();
     }
 
@@ -37,31 +39,25 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.available_category_item, parent, false);
-        return new ViewHolder(view);
+        return new FilterByAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Category category = categories.get(position);
+        FilterBy filter = filterByList.get(position);
 
-        holder.categoryName.setText(category.getStrCategory());
+        holder.categoryName.setText(filter.getStrMeal());
         Glide.with(holder.itemView.getContext())
-                .load(category.getStrCategoryThumb())
+                .load(filter.getStrMealThumb())
                 .into(holder.categoryImg);
-        holder.categoryImg.setOnClickListener(v -> {
-            listener.onAddSearchClicked(category);
-        });
-    }
 
-    public void updateList(List<Category> newList) {
-        this.categories = newList;
-        notifyDataSetChanged();
+
     }
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return filterByList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -75,5 +71,6 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
             categoryName = itemView.findViewById(R.id.tv_category_name);
 
         }
+
     }
 }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class SearchFragment extends Fragment implements SearchView {
+public class SearchFragment extends Fragment implements SearchView, OnSearchClickListener {
 
     EditText search;
     RecyclerView rvCategories, rvCountry, rvIngredient;
@@ -72,7 +73,7 @@ public class SearchFragment extends Fragment implements SearchView {
         searchImp.getIngredients();
 
 
-        rvCategoriesAdapter = new RVCategoriesAdapter(getContext(), new ArrayList<>());
+        rvCategoriesAdapter = new RVCategoriesAdapter(getContext(), new ArrayList<>(), this);
         rvCountryAdapter = new RVCountryAdapter(getContext(), new ArrayList<>());
         rvIngredientAdapter = new RVIngredientAdapter(getContext(), new ArrayList<>());
 
@@ -175,5 +176,14 @@ public class SearchFragment extends Fragment implements SearchView {
     @Override
     public void showErrMsg(String err) {
 
+    }
+
+
+    @Override
+    public void onAddSearchClicked(Category category) {
+        SearchFragmentDirections.ActionSearchFragmentToFilterByFragment action =
+                SearchFragmentDirections.actionSearchFragmentToFilterByFragment(category);
+
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

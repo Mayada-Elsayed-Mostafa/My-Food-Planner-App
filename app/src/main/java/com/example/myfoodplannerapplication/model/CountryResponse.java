@@ -8,7 +8,6 @@ public class CountryResponse {
     @SerializedName("meals")
     private List<Country> countries;
 
-
     public CountryResponse(List<Country> _countries) {
         this.countries = _countries;
     }

@@ -1,7 +1,7 @@
-package com.example.myfoodplannerapplication.home.view.meal;
+package com.example.myfoodplannerapplication.filtered.mealsFilteredBy.view;
 
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 
-public interface OnMealOfTheDayClickListener {
+public interface OnFilterByClickListener {
     public void onAddMealClicked(InspirationMeal meal);
 }

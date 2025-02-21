@@ -20,6 +20,7 @@
             android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.myfoodplannerapplication.LoginFragment"
@@ -32,6 +33,7 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.myfoodplannerapplication.SignupFragment"
@@ -76,6 +78,7 @@
             app:destination="@id/profileFragment" />
 
     </fragment>
+
     <fragment
         android:id="@+id/mealDetailsFragment"
         android:name="com.example.myfoodplannerapplication.details.view.MealDetailsFragment"
@@ -153,5 +156,18 @@
         <action
             android:id="@+id/action_searchFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_filterByFragment"
+            app:destination="@id/filterByFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterByFragment"
+        android:name="com.example.myfoodplannerapplication.filtered.mealsFilteredBy.view.FilterByFragment"
+        android:label="fragment_by_filter"
+        tools:layout="@layout/fragment_by_filter" >
+        <argument
+            android:name="filter"
+            app:argType="com.example.myfoodplannerapplication.model.Category"
+            app:nullable="false" />
     </fragment>
 </navigation>

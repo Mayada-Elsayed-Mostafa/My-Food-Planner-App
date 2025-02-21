@@ -1,5 +1,6 @@
 package com.example.myfoodplannerapplication.network;
 
+import com.example.myfoodplannerapplication.model.ByFilterResponse;
 import com.example.myfoodplannerapplication.model.CategoriesResponse;
 import com.example.myfoodplannerapplication.model.CountryResponse;
 import com.example.myfoodplannerapplication.model.IngredientResponse;
@@ -24,7 +25,7 @@ public interface InspirationMealService {
     Single<IngredientResponse> getIngredients();
 
     @GET("/api/json/v1/1/filter.php")
-    Single<CategoriesResponse> getMealsByCategory(@Query("c") String category);
+    Single<ByFilterResponse> getMealsByCategory(@Query("c") String category);
 
     @GET("/api/json/v1/1/filter.php")
     Single<CountryResponse> getMealsByCountry(@Query("a") String area);

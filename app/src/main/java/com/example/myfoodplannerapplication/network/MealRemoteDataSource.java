@@ -2,6 +2,7 @@ package com.example.myfoodplannerapplication.network;
 
 import android.util.Log;
 
+import com.example.myfoodplannerapplication.model.ByFilterResponse;
 import com.example.myfoodplannerapplication.model.CategoriesResponse;
 import com.example.myfoodplannerapplication.model.CountryResponse;
 import com.example.myfoodplannerapplication.model.IngredientResponse;
@@ -22,7 +23,6 @@ public class MealRemoteDataSource {
     public static String BASE_URL = "https://www.themealdb.com/";
     private InspirationMealService inspirationMealService;
     private static MealRemoteDataSource remoteDataSource = null;
-
 
 
     public MealRemoteDataSource() {
@@ -78,6 +78,12 @@ public class MealRemoteDataSource {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ByFilterResponse> getMealsByCategoriesOverNetwork(String category) {
+        return inspirationMealService.getMealsByCategory(category)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
     }
 
 

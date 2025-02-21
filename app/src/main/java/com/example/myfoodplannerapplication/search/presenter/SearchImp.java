@@ -10,7 +10,6 @@ import com.example.myfoodplannerapplication.model.Ingredient;
 import com.example.myfoodplannerapplication.model.IngredientResponse;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.search.view.SearchFragment;
-import com.example.myfoodplannerapplication.search.view.SearchView;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchImp implements Search {
     MealRepository mealRepository;
-    SearchView searchView;
     SearchFragment searchFragment;
 
 
