@@ -19,8 +19,8 @@ public interface MealDao {
     Observable<List<InspirationMeal>> getFavoriteMeals();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertMeal(InspirationMeal product);
+    void insertMeal(InspirationMeal meal);
 
     @Delete
-    void deleteMeal(InspirationMeal product);
+    void deleteMeal(InspirationMeal meal);
 }

@@ -18,4 +18,9 @@ public class MealDetailsImp implements MealDetails {
     public void addToFav(InspirationMeal inspirationMeal) {
         mealRepository.insert(inspirationMeal);
     }
+
+    @Override
+    public void addToCalendar(InspirationMeal inspirationMeal) {
+
+    }
 }

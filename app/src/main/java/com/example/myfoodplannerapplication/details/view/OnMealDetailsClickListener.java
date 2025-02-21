@@ -4,5 +4,6 @@ import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 public interface OnMealDetailsClickListener {
 
-    public void onAddMealDetailsClicked(InspirationMeal inspirationMeal);
+    public void onAddFavMealDetailsClicked(InspirationMeal inspirationMeal);
 }
+

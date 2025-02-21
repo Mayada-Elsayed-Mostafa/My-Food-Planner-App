@@ -23,6 +23,17 @@ public class InspirationMeal implements Parcelable {
         this.id = id;
     }
 
+    private String day;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+
     private String strMeal;
     private String strMealThumb;
     private String idMeal;
