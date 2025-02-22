@@ -2,10 +2,14 @@ package com.example.myfoodplannerapplication.details.view;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,9 +36,11 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     ImageView addToFav, addToCalendar;
     MealDetailsImp mealDetailsImp;
     InspirationMeal meal;
+
     MealDetailsView mealDetailsView;
     MealRepository mealRepository;
     MealsOfWeek mealsOfWeek;
+    WebView webView;
 
 
     public MealDetailsFragment() {
@@ -71,6 +77,7 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
         mealInstructionsTV = view.findViewById(R.id.tv_meal_instructions_in_details);
         mealIMG = view.findViewById(R.id.img_meal_in_details);
         mealAreaTV = view.findViewById(R.id.tv_area);
+        webView = view.findViewById(R.id.wv_video);
 
         mealNameTV.setText(mealName);
         mealAreaTV.setText(mealCountry);
@@ -94,8 +101,7 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
             Snackbar.make(view, "Done", Snackbar.LENGTH_LONG).show();
         });
 
-        String videoUrl = mealVideo;
-
+        loadYouTubeVideo(meal.getStrYoutube());
 
         return view;
     }
@@ -143,5 +149,15 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
         datePickerDialog.show();
     }
 
+    private void loadYouTubeVideo(String url) {
+        if (!TextUtils.isEmpty(url)) {
+            String videoId = url.split("v=")[1];
+            String embedUrl = "https://www.youtube.com/embed/" + videoId;
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl(embedUrl);
+        }
+    }
 
 }

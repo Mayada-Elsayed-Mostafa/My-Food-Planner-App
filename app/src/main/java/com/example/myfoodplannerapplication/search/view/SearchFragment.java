@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class SearchFragment extends Fragment implements SearchView, OnSearchClickListener {
 
     EditText search;
-    RecyclerView rvCategories, rvCountry, rvIngredient;
+    RecyclerView rvResults;
     RVCategoriesAdapter rvCategoriesAdapter;
     RVCountryAdapter rvCountryAdapter;
     RVIngredientAdapter rvIngredientAdapter;
@@ -59,9 +59,9 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvCategories = view.findViewById(R.id.rv_categories);
-        rvCountry = view.findViewById(R.id.rv_country);
-        rvIngredient = view.findViewById(R.id.rv_ingredient);
+        rvResults = view.findViewById(R.id.rv_search_results);
+        rvResults.setLayoutManager(new LinearLayoutManager(getContext()));
+
         search = view.findViewById(R.id.search_bar);
         categoryChip = view.findViewById(R.id.chip_categories);
         countryChip = view.findViewById(R.id.chip_countries);
@@ -72,21 +72,9 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
         searchImp.getCountries();
         searchImp.getIngredients();
 
-
         rvCategoriesAdapter = new RVCategoriesAdapter(getContext(), new ArrayList<>(), this);
         rvCountryAdapter = new RVCountryAdapter(getContext(), new ArrayList<>());
         rvIngredientAdapter = new RVIngredientAdapter(getContext(), new ArrayList<>());
-
-
-        rvCategories.setAdapter(rvCategoriesAdapter);
-        rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        rvCountry.setAdapter(rvCountryAdapter);
-        rvCountry.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        rvIngredient.setAdapter(rvIngredientAdapter);
-        rvIngredient.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -99,6 +87,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
                 String query = charSequence.toString().toLowerCase();
 
                 if (categoryChip.isChecked()) {
+                    rvResults.setAdapter(rvCategoriesAdapter);
                     List<Category> filteredList = categories.stream()
                             .filter(category -> category.getStrCategory().toLowerCase().contains(query))
                             .collect(Collectors.toList());
@@ -106,6 +95,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
                 }
 
                 if (countryChip.isChecked()) {
+                    rvResults.setAdapter(rvCountryAdapter);
                     List<Country> filteredList = countries.stream()
                             .filter(country -> country.getStrArea().toLowerCase().contains(query))
                             .collect(Collectors.toList());
@@ -113,6 +103,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
                 }
 
                 if (ingredientChip.isChecked()) {
+                    rvResults.setAdapter(rvIngredientAdapter);
                     List<Ingredient> filteredList = ingredients.stream()
                             .filter(ingredient -> ingredient.getStrIngredient().toLowerCase().contains(query))
                             .collect(Collectors.toList());

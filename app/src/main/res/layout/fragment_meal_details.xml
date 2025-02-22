@@ -85,6 +85,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_area" />
 
+        <WebView
+            android:id="@+id/wv_video"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_meal_instructions_in_details"
+            tools:ignore="WebViewLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

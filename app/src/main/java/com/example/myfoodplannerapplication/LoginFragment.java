@@ -1,5 +1,8 @@
 package com.example.myfoodplannerapplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +31,7 @@ public class LoginFragment extends Fragment {
     private TextView forgotPassword;
     private Button login;
     private TextView createAnAccount;
+    private SharedPreferences preferences;
 
     @Nullable
     @Override
@@ -40,6 +44,8 @@ public class LoginFragment extends Fragment {
         forgotPassword = view.findViewById(R.id.tv_forgotPassword);
         login = view.findViewById(R.id.btn_login);
         createAnAccount = view.findViewById(R.id.tv_createAccount);
+
+        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
 
 
         login.setOnClickListener(v -> {
@@ -63,6 +69,9 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putBoolean("isLoggedIn", true);
+                                editor.apply();
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment2);

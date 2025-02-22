@@ -20,7 +20,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class SplashFragment extends Fragment {
 
     SharedPreferences preferences;
-    private static final int SPLASH_DELAY = 5000;
+    private static final int SPLASH_DELAY = 3000;
 
     public SplashFragment() {
         // Required empty public constructor
