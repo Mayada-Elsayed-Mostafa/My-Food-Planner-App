@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "mealtable")
-public class InspirationMeal implements Parcelable {
+@Entity(tableName = "plantable")
+public class MealsOfWeek implements Parcelable {
 
     @PrimaryKey
     @NonNull
@@ -21,6 +21,16 @@ public class InspirationMeal implements Parcelable {
 
     public void setId(@NonNull Long id) {
         this.id = id;
+    }
+
+    private String day;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     private String strMeal;
@@ -51,12 +61,38 @@ public class InspirationMeal implements Parcelable {
     private String strIngredient19;
     private String strIngredient20;
 
-    public InspirationMeal(String strMealThumb, String strMeal) {
-        this.strMealThumb = strMealThumb;
+    public MealsOfWeek(String day, String strMeal, String strMealThumb, String idMeal, String strCategory, String strArea, String strInstructions, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20) {
+        this.day = day;
         this.strMeal = strMeal;
+        this.strMealThumb = strMealThumb;
+        this.idMeal = idMeal;
+        this.strCategory = strCategory;
+        this.strArea = strArea;
+        this.strInstructions = strInstructions;
+        this.strYoutube = strYoutube;
+        this.strIngredient1 = strIngredient1;
+        this.strIngredient2 = strIngredient2;
+        this.strIngredient3 = strIngredient3;
+        this.strIngredient4 = strIngredient4;
+        this.strIngredient5 = strIngredient5;
+        this.strIngredient6 = strIngredient6;
+        this.strIngredient7 = strIngredient7;
+        this.strIngredient8 = strIngredient8;
+        this.strIngredient9 = strIngredient9;
+        this.strIngredient10 = strIngredient10;
+        this.strIngredient11 = strIngredient11;
+        this.strIngredient12 = strIngredient12;
+        this.strIngredient13 = strIngredient13;
+        this.strIngredient14 = strIngredient14;
+        this.strIngredient15 = strIngredient15;
+        this.strIngredient16 = strIngredient16;
+        this.strIngredient17 = strIngredient17;
+        this.strIngredient18 = strIngredient18;
+        this.strIngredient19 = strIngredient19;
+        this.strIngredient20 = strIngredient20;
     }
 
-    protected InspirationMeal(Parcel in) {
+    protected MealsOfWeek(Parcel in) {
         strMeal = in.readString();
         strMealThumb = in.readString();
         idMeal = in.readString();
@@ -122,15 +158,15 @@ public class InspirationMeal implements Parcelable {
         return 0;
     }
 
-    public static final Creator<InspirationMeal> CREATOR = new Creator<InspirationMeal>() {
+    public static final Creator<MealsOfWeek> CREATOR = new Creator<MealsOfWeek>() {
         @Override
-        public InspirationMeal createFromParcel(Parcel in) {
-            return new InspirationMeal(in);
+        public MealsOfWeek createFromParcel(Parcel in) {
+            return new MealsOfWeek(in);
         }
 
         @Override
-        public InspirationMeal[] newArray(int size) {
-            return new InspirationMeal[size];
+        public MealsOfWeek[] newArray(int size) {
+            return new MealsOfWeek[size];
         }
     };
 

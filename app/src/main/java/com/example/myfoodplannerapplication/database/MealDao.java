@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.myfoodplannerapplication.model.InspirationMeal;
+import com.example.myfoodplannerapplication.model.MealsOfWeek;
 
 import java.util.List;
 
@@ -23,4 +24,15 @@ public interface MealDao {
 
     @Delete
     void deleteMeal(InspirationMeal meal);
+
+
+    @Query("SELECT * FROM plantable")
+    Observable<List<MealsOfWeek>> getMealsOfWeek();
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMealsOfWeek(MealsOfWeek meals);
+
+    @Delete
+    void deleteMealsOfWeek(MealsOfWeek meals);
 }
+

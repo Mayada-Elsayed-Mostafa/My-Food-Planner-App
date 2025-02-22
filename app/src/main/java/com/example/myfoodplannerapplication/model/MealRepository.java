@@ -28,7 +28,11 @@ public class MealRepository {
     }
 
     public Observable<List<InspirationMeal>> getAllData() {
-        return mealLocalDataSource.getData();
+        return mealLocalDataSource.getMeal();
+    }
+
+    public Observable<List<MealsOfWeek>> getMealsOfWeek() {
+        return mealLocalDataSource.getMealsOfWeek();
     }
 
     public Single<InspirationMealResponse> getMealFromNetwork() {
@@ -45,6 +49,14 @@ public class MealRepository {
 
     public void delete(InspirationMeal inspirationMeal) {
         mealLocalDataSource.delete(inspirationMeal);
+    }
+
+    public void insertToPlan(MealsOfWeek mealsOfWeek) {
+        mealLocalDataSource.insertToPlan(mealsOfWeek);
+    }
+
+    public void deleteFromPlan(MealsOfWeek mealsOfWeek) {
+        mealLocalDataSource.deleteFromPlan(mealsOfWeek);
     }
 
     public Single<CategoriesResponse> getCategoryFromNetwork() {

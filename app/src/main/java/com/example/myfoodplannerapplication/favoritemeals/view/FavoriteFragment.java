@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
-import com.example.myfoodplannerapplication.details.view.MealDetailsFragment;
 import com.example.myfoodplannerapplication.favoritemeals.presenter.FavoriteMealsImp;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;

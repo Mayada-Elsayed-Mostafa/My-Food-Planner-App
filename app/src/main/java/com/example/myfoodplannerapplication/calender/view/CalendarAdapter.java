@@ -1,4 +1,4 @@
-package com.example.myfoodplannerapplication.favoritemeals.view;
+package com.example.myfoodplannerapplication.calender.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,69 +9,60 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
-import com.example.myfoodplannerapplication.model.InspirationMeal;
+import com.example.myfoodplannerapplication.model.MealsOfWeek;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.ViewHolder> {
+public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHolder> {
+
 
     private Context context;
-    private List<InspirationMeal> favMeals = new ArrayList<>();
-    private OnFavMealClickListener listener;
+    private List<MealsOfWeek> mealsOfWeeks = new ArrayList<>();
+    private OnCalendarClickListener onCalendarClickListener;
 
-    public RVFavMealsAdapter(List<InspirationMeal> _favMeals, Context context, OnFavMealClickListener listener) {
-        this.favMeals = _favMeals;
+    public CalendarAdapter(List<MealsOfWeek> _mealsOfWeeks, Context context, OnCalendarClickListener _onCalendarClickListener) {
+        this.mealsOfWeeks = _mealsOfWeeks;
         this.context = context;
-        this.listener = listener;
+        this.onCalendarClickListener = _onCalendarClickListener;
     }
 
-    public void setList(List<InspirationMeal> _favMeals) {
-        this.favMeals = _favMeals;
+    public void setList(List<MealsOfWeek> _mealsOfWeeks) {
+        this.mealsOfWeeks = _mealsOfWeeks;
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.fav_meal_item, parent, false);
-        return new ViewHolder(view);
+        return new CalendarAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if (favMeals != null && !favMeals.isEmpty()) {
-            InspirationMeal meal = favMeals.get(position);
+        if (mealsOfWeeks != null && !mealsOfWeeks.isEmpty()) {
+            MealsOfWeek meal = mealsOfWeeks.get(position);
             Glide.with(context)
                     .load(meal.getStrMealThumb())
                     .into(holder.mealIV);
             holder.titleTV.setText(meal.getStrMeal());
-            holder.mealIV.setOnClickListener(v -> {
-                InspirationMeal selectedMeal = meal;
-                FavoriteFragmentDirections.ActionFavoriteFragmentToMealDetailsFragment action =
-                        FavoriteFragmentDirections.actionFavoriteFragmentToMealDetailsFragment(selectedMeal);
-                Navigation.findNavController(v).navigate(action);
 
-
-            });
             holder.remove.setOnClickListener(view -> {
-                listener.onFavMealClicked(meal);
+                onCalendarClickListener.onMealClicked(meal);
             });
-
-
         }
+
     }
 
     @Override
     public int getItemCount() {
-        return favMeals.size();
+        return 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
