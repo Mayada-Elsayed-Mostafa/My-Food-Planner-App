@@ -80,7 +80,6 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -116,7 +115,6 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
             }
         });
 
-
     }
 
     @Override
@@ -127,7 +125,6 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
 
         return view;
     }
-
 
     @Override
     public void setCategory(List<Category> categoryList) {
@@ -168,7 +165,6 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
     public void showErrMsg(String err) {
 
     }
-
 
     @Override
     public void onAddSearchClicked(Category category) {

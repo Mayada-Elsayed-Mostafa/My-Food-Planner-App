@@ -34,5 +34,8 @@ public interface MealDao {
 
     @Delete
     void deleteMealsOfWeek(MealsOfWeek meals);
+
+    @Query("SELECT * FROM plantable WHERE day = :selectedDate")
+    Observable<List<MealsOfWeek>> getMealsForDate(String selectedDate);
 }
 

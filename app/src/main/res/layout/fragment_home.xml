@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_10sdp"
     android:orientation="vertical"
     tools:context=".home.view.HomeFragment">
 
@@ -12,6 +12,7 @@
         android:id="@+id/tv_title_inspirationMeal"
         style="@style/TitleTextStyle"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_7sdp"
         android:layout_height="wrap_content"
         android:text="@string/handpickedforYou" />
 
@@ -36,8 +37,13 @@
             style="@style/TitleTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Categories of available List" />
+            android:text="@string/categories" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_of_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
     </LinearLayout>
 

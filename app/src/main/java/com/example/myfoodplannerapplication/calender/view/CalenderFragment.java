@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -34,11 +35,9 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -53,18 +52,25 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         calendarImp = new CalendarImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
 
-        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                mealList -> {
+        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+            String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+            loadMealsForSelectedDate(selectedDate);
+        });
+
+        calendarImp.getPlanMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mealList -> {
                     calendarAdapter.setList(mealList);
                     calendarAdapter.notifyDataSetChanged();
-                },
-                throwable -> {
-                    Log.d("TAG", "onPlanMealClicked: ");
+                }, throwable -> {
+                    Log.d("TAG", "Error: " + throwable.getMessage());
                 });
-
 
         return view;
     }
+
 
     @Override
     public void onMealClicked(MealsOfWeek mealsOfWeek) {
@@ -72,13 +78,27 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         calendarImp.delete(mealsOfWeek);
         Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
 
-        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                updatedMealList -> {
-                    calendarAdapter.setList(updatedMealList);
+        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(updatedMealList -> {
+                            calendarAdapter.setList(updatedMealList);
+                            calendarAdapter.notifyDataSetChanged();
+                        }
+                        , throwable -> {
+                            Log.d("TAG", "onPlanMealClicked: ");
+                        });
+
+
+    }
+
+    private void loadMealsForSelectedDate(String selectedDate) {
+        calendarImp.getPlanMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mealList -> {
+                    calendarAdapter.setList(mealList);
                     calendarAdapter.notifyDataSetChanged();
-                }
-                , throwable -> {
-                    Log.d("TAG", "onPlanMealClicked: ");
+                }, throwable -> {
+                    Log.d("TAG", "Error: " + throwable.getMessage());
                 });
     }
 }

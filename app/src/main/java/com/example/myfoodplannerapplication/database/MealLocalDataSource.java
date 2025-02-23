@@ -66,4 +66,8 @@ public class MealLocalDataSource {
     public Observable<List<MealsOfWeek>> getMealsOfWeek() {
         return mealsOfWeek;
     }
+
+    public Observable<List<MealsOfWeek>> getMealsForDate(String selectedDate) {
+        return mealDao.getMealsForDate(selectedDate);
+    }
 }

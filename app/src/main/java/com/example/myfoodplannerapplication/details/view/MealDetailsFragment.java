@@ -36,9 +36,6 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     ImageView addToFav, addToCalendar;
     MealDetailsImp mealDetailsImp;
     InspirationMeal meal;
-
-    MealDetailsView mealDetailsView;
-    MealRepository mealRepository;
     MealsOfWeek mealsOfWeek;
     WebView webView;
 

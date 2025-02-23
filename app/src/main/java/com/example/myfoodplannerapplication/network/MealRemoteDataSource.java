@@ -24,7 +24,6 @@ public class MealRemoteDataSource {
     private InspirationMealService inspirationMealService;
     private static MealRemoteDataSource remoteDataSource = null;
 
-
     public MealRemoteDataSource() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -57,13 +56,11 @@ public class MealRemoteDataSource {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-
     public Single<CategoriesResponse> getCategoryOverNetwork() {
         return inspirationMealService.getCategories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-
 
     public Single<CountryResponse> getCountryOverNetwork() {
         return inspirationMealService.getCountries()
@@ -85,6 +82,5 @@ public class MealRemoteDataSource {
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread());
     }
-
 
 }
