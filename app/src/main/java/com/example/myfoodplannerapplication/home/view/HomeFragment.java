@@ -17,13 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.home.presenter.category.CategoriesImp;
+import com.example.myfoodplannerapplication.home.presenter.country.CountriesImp;
 import com.example.myfoodplannerapplication.home.presenter.meal.MealOfTheDayImp;
 import com.example.myfoodplannerapplication.home.view.category.CategoriesView;
 import com.example.myfoodplannerapplication.home.view.category.RVCategoriesAdapter;
+import com.example.myfoodplannerapplication.home.view.country.CountriesView;
+import com.example.myfoodplannerapplication.home.view.country.RVCountriesAdapter;
 import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayAdapter;
 import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayView;
 import com.example.myfoodplannerapplication.home.view.meal.OnMealOfTheDayClickListener;
 import com.example.myfoodplannerapplication.model.Category;
+import com.example.myfoodplannerapplication.model.Country;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
@@ -31,13 +35,15 @@ import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOfTheDayClickListener, CategoriesView {
+public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOfTheDayClickListener, CategoriesView, CountriesView {
     ImageView mealIMG;
     MealOfTheDayImp mealOfTheDayImp;
     MealOfTheDayAdapter mealOfTheDayAdapter;
     RVCategoriesAdapter rvCategoriesAdapter;
-    RecyclerView recyclerView, rvCategories;
+    RVCountriesAdapter rvCountriesAdapter;
+    RecyclerView recyclerView, rvCategories, rvCountries;
     CategoriesImp categoriesImp;
+    CountriesImp countriesImp;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,6 +55,8 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
 
         recyclerView = view.findViewById(R.id.rv_meal);
         rvCategories = view.findViewById(R.id.rv_list_of_categories);
+        rvCountries = view.findViewById(R.id.rv_list_of_countries);
+
         mealIMG = view.findViewById(R.id.meal_iv);
 
         mealOfTheDayImp = new MealOfTheDayImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
@@ -56,6 +64,9 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
 
         categoriesImp = new CategoriesImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
         categoriesImp.getCategories();
+
+        countriesImp = new CountriesImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
+        countriesImp.getCountries();
 
         mealOfTheDayAdapter = new MealOfTheDayAdapter(new ArrayList<>(), getContext(), this);
         recyclerView.setAdapter(mealOfTheDayAdapter);
@@ -65,6 +76,9 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
         rvCategories.setAdapter(rvCategoriesAdapter);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        rvCountriesAdapter = new RVCountriesAdapter(getContext(), new ArrayList<>());
+        rvCountries.setAdapter(rvCountriesAdapter);
+        rvCountries.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
@@ -84,6 +98,11 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
     @Override
     public void setCategory(List<Category> categoryList) {
         rvCategoriesAdapter.setList(categoryList);
+    }
+
+    @Override
+    public void setCountry(List<Country> countryList) {
+        rvCountriesAdapter.setList(countryList);
     }
 
     @Override

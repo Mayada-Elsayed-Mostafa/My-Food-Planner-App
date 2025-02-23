@@ -1,50 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/_10sdp"
-    android:orientation="vertical"
     tools:context=".home.view.HomeFragment">
 
-    <TextView
-        android:id="@+id/tv_title_inspirationMeal"
-        style="@style/TitleTextStyle"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:layout_height="wrap_content"
-        android:text="@string/handpickedforYou" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_meal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" />
-
-
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title_categories_available_list"
+            android:id="@+id/tv_title_inspirationMeal"
             style="@style/TitleTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/categories" />
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="@string/handpickedforYou" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list_of_categories"
-            android:layout_width="wrap_content"
+            android:id="@+id/rv_meal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
 
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title_categories_available_list"
+                style="@style/TitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/categories" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_of_categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title_countries_available_list"
+                style="@style/TitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/countries" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_of_countries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title_ingredients_available_list"
+                style="@style/TitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_of_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
