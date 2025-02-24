@@ -1,5 +1,7 @@
 package com.example.myfoodplannerapplication.model;
 
+import android.util.Log;
+
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
@@ -30,9 +32,11 @@ public class MealRepository {
         return mealLocalDataSource.getMeal();
     }
 
-    public Observable<List<WeekMeals>> getMealsOfWeek() {
-        return mealLocalDataSource.getMeals();
+    public Observable<List<WeekMeals>> getMealsForDate(String selectedDate) {
+        Log.d("TAG", "Fetching meals for date: " + selectedDate);
+        return mealLocalDataSource.getMealsForDate(selectedDate);
     }
+
 
     public Single<InspirationMealResponse> getMealFromNetwork() {
         return mealRemoteDataSource.getMealOverNetwork()
@@ -50,10 +54,6 @@ public class MealRepository {
         mealLocalDataSource.delete(inspirationMeal);
     }
 
-    public void insertToPlan(MealsOfWeek mealsOfWeek) {
-        mealLocalDataSource.insertToPlan(mealsOfWeek);
-    }
-
     public void insertToWeeklyPlan(WeekMeals meals) {
         mealLocalDataSource.insertToWeeklyPlan(meals);
     }
@@ -62,9 +62,6 @@ public class MealRepository {
         mealLocalDataSource.deleteFromWeeklyPlan(meals);
     }
 
-    public void deleteFromPlan(MealsOfWeek mealsOfWeek) {
-        mealLocalDataSource.deleteFromPlan(mealsOfWeek);
-    }
 
     public Single<CategoriesResponse> getCategoryFromNetwork() {
         return mealRemoteDataSource.getCategoryOverNetwork();

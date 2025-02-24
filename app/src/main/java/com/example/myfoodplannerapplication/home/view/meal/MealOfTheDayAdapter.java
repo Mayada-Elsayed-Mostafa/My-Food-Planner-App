@@ -8,13 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
-import com.example.myfoodplannerapplication.home.view.HomeFragment;
-import com.example.myfoodplannerapplication.home.view.HomeFragmentDirections;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.ArrayList;
@@ -55,7 +52,7 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
                     .into(holder.mealIV);
             holder.titleTV.setText(meal.getStrMeal());
 
-            holder.mealIV.setOnClickListener(v->{
+            holder.mealIV.setOnClickListener(v -> {
                 listener.onAddMealClicked(meal);
             });
 

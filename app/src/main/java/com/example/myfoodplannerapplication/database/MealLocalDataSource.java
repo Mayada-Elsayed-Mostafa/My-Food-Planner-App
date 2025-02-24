@@ -3,11 +3,9 @@ package com.example.myfoodplannerapplication.database;
 import android.content.Context;
 
 import com.example.myfoodplannerapplication.model.InspirationMeal;
-import com.example.myfoodplannerapplication.model.MealsOfWeek;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 
 import java.util.List;
-import java.util.WeakHashMap;
 
 import io.reactivex.rxjava3.core.Observable;
 
@@ -22,7 +20,6 @@ public class MealLocalDataSource {
         AppDatabase appDatabase = AppDatabase.getInstance(context.getApplicationContext());
         mealDao = appDatabase.getMealDao();
         inspirationMeals = mealDao.getFavoriteMeals();
-        mealsOfWeek = mealDao.getMeals();
     }
 
     public static MealLocalDataSource getInstance(Context context) {
@@ -36,6 +33,11 @@ public class MealLocalDataSource {
     public Observable<List<InspirationMeal>> getMeal() {
         return inspirationMeals;
     }
+
+    public Observable<List<WeekMeals>> getMealsForDate(String date) {
+        return mealDao.getMealsForDate(date);
+    }
+
 
     public Observable<List<WeekMeals>> getMeals() {
         return mealsOfWeek;
@@ -53,25 +55,13 @@ public class MealLocalDataSource {
         }).start();
     }
 
-    public void insertToPlan(MealsOfWeek mealsOfWeek) {
-        new Thread(() -> {
-            mealDao.insertMealsOfWeek(mealsOfWeek);
-        }).start();
-    }
-
-    public void deleteFromPlan(MealsOfWeek mealsOfWeek) {
-        new Thread(() -> {
-            mealDao.deleteMealsOfWeek(mealsOfWeek);
-        }).start();
-    }
-
-    public void insertToWeeklyPlan(WeekMeals meals){
+    public void insertToWeeklyPlan(WeekMeals meals) {
         new Thread(() -> {
             mealDao.insertMealToWeek(meals);
         }).start();
     }
 
-    public void deleteFromWeeklyPlan(WeekMeals meals){
+    public void deleteFromWeeklyPlan(WeekMeals meals) {
         new Thread(() -> {
             mealDao.deleteMealFromWeek(meals);
         }).start();

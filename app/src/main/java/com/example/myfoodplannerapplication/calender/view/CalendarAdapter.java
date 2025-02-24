@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 
@@ -46,21 +47,21 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
         if (mealsOfWeeks != null && !mealsOfWeeks.isEmpty()) {
             WeekMeals meal = mealsOfWeeks.get(position);
-//            Glide.with(context)
-//                    .load(meal.getStrMealThumb())
-//                    .into(holder.mealIV);
-//            holder.titleTV.setText(meal.getStrMeal());
-//
-//            holder.remove.setOnClickListener(view -> {
-//                onCalendarClickListener.onMealClicked(meal);
-//            });
+            Glide.with(context)
+                    .load(meal.getMeal().getStrMealThumb())
+                    .into(holder.mealIV);
+            holder.titleTV.setText(meal.getMeal().getStrMeal());
+
+            holder.remove.setOnClickListener(view -> {
+                onCalendarClickListener.onMealClicked(meal);
+            });
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mealsOfWeeks.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,21 +1,20 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <android.widget.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:padding="16dp"/>
+        android:padding="@dimen/_10sdp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealPlansRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/calendarView"
-        android:padding="16dp"/>
+        android:layout_height="wrap_content"
+        android:padding="16dp" />
 
 
-</RelativeLayout>
+</LinearLayout>

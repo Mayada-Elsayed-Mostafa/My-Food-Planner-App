@@ -108,12 +108,12 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             monthOfYear = monthOfYear + 1;
 
-                            String selectedDate = dayOfMonth + "/" + monthOfYear + "/" + year;
+                            String selectedDate = year + "-" + monthOfYear + "-" + dayOfMonth;
 
                             WeekMeals weekMeal = new WeekMeals();
                             weekMeal.setId(meal.getIdMeal());
                             weekMeal.setDay(selectedDate);
-                            weekMeal.setType("Dinner");
+                            weekMeal.setType(meal.getStrCategory());
                             weekMeal.setMeal(meal);
 
                             MealLocalDataSource.getInstance(getContext()).insertToWeeklyPlan(weekMeal);

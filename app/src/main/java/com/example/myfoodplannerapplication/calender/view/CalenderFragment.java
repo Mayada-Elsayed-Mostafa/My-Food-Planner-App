@@ -9,19 +9,23 @@ import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.calender.presenter.CalendarImp;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
@@ -58,30 +62,34 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
             loadMealsForSelectedDate(selectedDate);
         });
 
-        calendarImp.getPlanMeals()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mealList -> {
-                    calendarAdapter.setList(mealList);
-                    calendarAdapter.notifyDataSetChanged();
-                }, throwable -> {
-                    Log.d("TAG", "Error: " + throwable.getMessage());
-                });
-
         return view;
     }
 
-
     private void loadMealsForSelectedDate(String selectedDate) {
-        calendarImp.getPlanMeals()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mealList -> {
-                    calendarAdapter.setList(mealList);
-                    calendarAdapter.notifyDataSetChanged();
-                }, throwable -> {
-                    Log.d("TAG", "Error: " + throwable.getMessage());
-                });
+        Observable<List<WeekMeals>> mealObservable = calendarImp.getMealsForDate(selectedDate);
+        if (mealObservable != null) {
+            mealObservable
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(mealList -> {
+                        if (mealList != null && !mealList.isEmpty()) {
+                            Log.d("TAG", "Meals found: " + mealList.size());
+                            showBottomSheet(mealList); // هنا نعرض الـ BottomSheet
+                        } else {
+                            Log.d("TAG", "No meals found for the selected date.");
+                        }
+                    }, throwable -> {
+                        Log.d("TAG", "Error: " + throwable.getMessage());
+                    });
+        } else {
+            Log.e("TAG", "The Observable returned by getMealsForDate() is null");
+        }
+    }
+
+    // دالة لعرض BottomSheet
+    private void showBottomSheet(List<WeekMeals> mealList) {
+        BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(mealList);
+        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
 
     @Override
@@ -89,7 +97,7 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         calendarImp.delete(meals);
         Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
 
-        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        calendarImp.getMealsForDate(meals.getDay()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(updatedMealList -> {
                             calendarAdapter.setList(updatedMealList);
                             calendarAdapter.notifyDataSetChanged();
@@ -97,5 +105,12 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
                         , throwable -> {
                             Log.d("TAG", "onPlanMealClicked: ");
                         });
+    }
+
+    @Override
+    public void onImageMealClicked(InspirationMeal meal) {
+        CalenderFragmentDirections.ActionCalenderFragmentToMealDetailsFragment action =
+                CalenderFragmentDirections.actionCalenderFragmentToMealDetailsFragment(meal);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }
