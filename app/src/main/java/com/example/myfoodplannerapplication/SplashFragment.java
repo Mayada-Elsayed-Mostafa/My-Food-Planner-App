@@ -2,16 +2,19 @@ package com.example.myfoodplannerapplication;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -34,6 +37,20 @@ public class SplashFragment extends Fragment {
         LottieAnimationView lottieAnimationView = view.findViewById(R.id.lottie_splash);
         lottieAnimationView.setAnimation(R.raw.splash_animation);
         lottieAnimationView.playAnimation();
+
+        TextView title = view.findViewById(R.id.title);
+
+        title.post(() -> {
+            LinearGradient gradient = new LinearGradient(0, 0, 0, title.getHeight(),
+                    ContextCompat.getColor(getContext(), R.color.my_light_primary),
+                    ContextCompat.getColor(getContext(), R.color.my_light_tertiary),
+                    Shader.TileMode.CLAMP);
+
+            title.getPaint().setShader(gradient);
+
+            title.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            title.setShadowLayer(8, 0, 0, ContextCompat.getColor(getContext(), R.color.accent_yellow)); // تأثير توهج أصفر
+        });
 
         preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);

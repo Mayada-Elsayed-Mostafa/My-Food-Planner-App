@@ -2,13 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/my_light_primary_container" />
 
     <stroke
         android:width="@dimen/_1sdp"
-        android:color="@color/my_light_primary" />
+        android:color="@color/my_light_tertiary" />
 
-    <corners android:radius="@dimen/_20sdp" />
+    <corners android:radius="@dimen/_20sdp" /> <!-- التأثير المدور للكارت -->
 
     <padding
         android:bottom="@dimen/_4sdp"

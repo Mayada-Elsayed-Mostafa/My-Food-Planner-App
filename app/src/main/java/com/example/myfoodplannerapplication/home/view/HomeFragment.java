@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
+import com.example.myfoodplannerapplication.home.presenter.Ingredients.IngredientsImp;
 import com.example.myfoodplannerapplication.home.presenter.category.CategoriesImp;
 import com.example.myfoodplannerapplication.home.presenter.country.CountriesImp;
 import com.example.myfoodplannerapplication.home.presenter.meal.MealOfTheDayImp;
@@ -23,11 +24,14 @@ import com.example.myfoodplannerapplication.home.view.category.CategoriesView;
 import com.example.myfoodplannerapplication.home.view.category.RVCategoriesAdapter;
 import com.example.myfoodplannerapplication.home.view.country.CountriesView;
 import com.example.myfoodplannerapplication.home.view.country.RVCountriesAdapter;
+import com.example.myfoodplannerapplication.home.view.ingredients.IngredientAdapter;
+import com.example.myfoodplannerapplication.home.view.ingredients.IngredientView;
 import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayAdapter;
 import com.example.myfoodplannerapplication.home.view.meal.MealOfTheDayView;
 import com.example.myfoodplannerapplication.home.view.meal.OnMealOfTheDayClickListener;
 import com.example.myfoodplannerapplication.model.Category;
 import com.example.myfoodplannerapplication.model.Country;
+import com.example.myfoodplannerapplication.model.Ingredient;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
@@ -35,15 +39,19 @@ import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOfTheDayClickListener, CategoriesView, CountriesView {
+public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOfTheDayClickListener, CategoriesView, CountriesView, IngredientView {
+
+
     ImageView mealIMG;
     MealOfTheDayImp mealOfTheDayImp;
     MealOfTheDayAdapter mealOfTheDayAdapter;
     RVCategoriesAdapter rvCategoriesAdapter;
     RVCountriesAdapter rvCountriesAdapter;
-    RecyclerView recyclerView, rvCategories, rvCountries;
+    IngredientAdapter ingredientAdapter;
+    RecyclerView recyclerView, rvCategories, rvCountries, rvIngredients;
     CategoriesImp categoriesImp;
     CountriesImp countriesImp;
+    IngredientsImp ingredientsImp;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,6 +64,7 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
         recyclerView = view.findViewById(R.id.rv_meal);
         rvCategories = view.findViewById(R.id.rv_list_of_categories);
         rvCountries = view.findViewById(R.id.rv_list_of_countries);
+        rvIngredients = view.findViewById(R.id.rv_list_of_ingredients);
 
         mealIMG = view.findViewById(R.id.meal_iv);
 
@@ -68,6 +77,9 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
         countriesImp = new CountriesImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
         countriesImp.getCountries();
 
+        ingredientsImp = new IngredientsImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
+        ingredientsImp.getIngredients();
+
         mealOfTheDayAdapter = new MealOfTheDayAdapter(new ArrayList<>(), getContext(), this);
         recyclerView.setAdapter(mealOfTheDayAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -79,6 +91,11 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
         rvCountriesAdapter = new RVCountriesAdapter(getContext(), new ArrayList<>());
         rvCountries.setAdapter(rvCountriesAdapter);
         rvCountries.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        ingredientAdapter = new IngredientAdapter(getContext(), new ArrayList<>());
+        rvIngredients.setAdapter(ingredientAdapter);
+        rvIngredients.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
     }
 
     @Override
@@ -106,6 +123,11 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
     }
 
     @Override
+    public void setIngredient(List<Ingredient> ingredientList) {
+        ingredientAdapter.setList(ingredientList);
+    }
+
+    @Override
     public void showErrMsg(String err) {
 
     }
@@ -116,5 +138,6 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
                 HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(meal);
         Navigation.findNavController(getView()).navigate(action);
     }
+
 
 }

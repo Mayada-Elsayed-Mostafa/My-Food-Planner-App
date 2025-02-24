@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_18sdp"
-    android:background="@drawable/custom_card"
-    android:elevation="@dimen/_4sdp"
-    android:orientation="vertical"
-    android:padding="@dimen/_7sdp">
+    android:padding="@dimen/_7sdp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    app:cardElevation="@dimen/_3sdp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/fav_meal_iv"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_130sdp"
-        android:layout_gravity="center_horizontal"
-        app:shapeAppearanceOverlay="@style/CircularShapeAppearance" />
-
-
-    <TextView
-        android:id="@+id/fav_title_tv"
-        style="@style/TitleTextStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/_8sdp"
-        android:gravity="center"
-        android:text="Title"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="@dimen/_7sdp">
 
-    <Button
-        android:id="@+id/btn_remove"
-        android:text="Remove"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp">
 
-</LinearLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/fav_meal_iv"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_gravity="center_horizontal"
+                app:shapeAppearanceOverlay="@style/CircularShapeAppearance" />
+
+
+            <ImageView
+                android:id="@+id/btn_remove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/_10sdp"
+                android:backgroundTint="@color/my_light_tertiary"
+                android:src="@drawable/bookmark_remove" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/fav_title_tv"
+            style="@style/TitleTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="Title"
+            android:textColor="@color/my_light_tertiary"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

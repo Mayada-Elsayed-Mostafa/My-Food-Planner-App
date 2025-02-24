@@ -30,8 +30,7 @@ import java.util.List;
 
 public class MealDetailsFragment extends Fragment implements OnMealDetailsClickListener, MealDetailsView {
 
-    TextView mealNameTV;
-    TextView mealInstructionsTV, mealAreaTV;
+    TextView mealNameTV, mealInstructionsTV, mealAreaTV, mealCategoryTV;
     ImageView mealIMG;
     ImageView addToFav, addToCalendar;
     MealDetailsImp mealDetailsImp;
@@ -68,16 +67,20 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
         String mealInstructions = meal.getStrInstructions();
         String mealImage = meal.getStrMealThumb();
         String mealCountry = meal.getStrArea();
+        String mealCategory = meal.getStrCategory();
+
         String mealVideo = meal.getStrYoutube();
 
         mealNameTV = view.findViewById(R.id.tv_meal_name_in_details);
         mealInstructionsTV = view.findViewById(R.id.tv_meal_instructions_in_details);
         mealIMG = view.findViewById(R.id.img_meal_in_details);
         mealAreaTV = view.findViewById(R.id.tv_area);
+        mealCategoryTV = view.findViewById(R.id.tv_category);
         webView = view.findViewById(R.id.wv_video);
 
         mealNameTV.setText(mealName);
         mealAreaTV.setText(mealCountry);
+        mealCategoryTV.setText(mealCategory);
 
         String[] instructionsList = mealInstructions.split(".\n");
 
@@ -92,17 +95,20 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
                 .load(mealImage)
                 .into(mealIMG);
 
-        addToFav.setOnClickListener(v -> onAddFavMealDetailsClicked(meal));
+        addToFav.setOnClickListener(v -> {
+            addToFav.setImageResource(R.drawable.bookmark_added);
+            onAddFavMealDetailsClicked(meal);
+        });
         addToCalendar.setOnClickListener(v -> {
             showDatePickerDialog();
             Snackbar.make(view, "Done", Snackbar.LENGTH_LONG).show();
+            addToCalendar.setImageResource(R.drawable.calendar_added);
         });
 
         loadYouTubeVideo(meal.getStrYoutube());
 
         return view;
     }
-
 
     @Override
     public void setData(List<InspirationMeal> inspirationMealList) {
@@ -113,7 +119,6 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     public void showErrMsg(String err) {
 
     }
-
 
     @Override
     public void onAddFavMealDetailsClicked(InspirationMeal inspirationMeal) {

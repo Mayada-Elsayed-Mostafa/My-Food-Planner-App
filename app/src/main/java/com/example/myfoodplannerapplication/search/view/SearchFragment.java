@@ -1,5 +1,7 @@
 package com.example.myfoodplannerapplication.search.view;
 
+import static android.view.View.GONE;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +37,7 @@ import java.util.stream.Collectors;
 public class SearchFragment extends Fragment implements SearchView, OnSearchClickListener {
 
     EditText search;
+    ImageView searchIMG;
     RecyclerView rvResults;
     RVCategoriesAdapter rvCategoriesAdapter;
     RVCountryAdapter rvCountryAdapter;
@@ -62,6 +66,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
         rvResults = view.findViewById(R.id.rv_search_results);
         rvResults.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        searchIMG = view.findViewById(R.id.iv_search);
         search = view.findViewById(R.id.search_bar);
         categoryChip = view.findViewById(R.id.chip_categories);
         countryChip = view.findViewById(R.id.chip_countries);
@@ -80,12 +85,14 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 String query = charSequence.toString().toLowerCase();
 
                 if (categoryChip.isChecked()) {
+                    searchIMG.setVisibility(GONE);
                     rvResults.setAdapter(rvCategoriesAdapter);
                     List<Category> filteredList = categories.stream()
                             .filter(category -> category.getStrCategory().toLowerCase().contains(query))
@@ -94,6 +101,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
                 }
 
                 if (countryChip.isChecked()) {
+                    searchIMG.setVisibility(GONE);
                     rvResults.setAdapter(rvCountryAdapter);
                     List<Country> filteredList = countries.stream()
                             .filter(country -> country.getStrArea().toLowerCase().contains(query))
@@ -102,6 +110,7 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
                 }
 
                 if (ingredientChip.isChecked()) {
+                    searchIMG.setVisibility(GONE);
                     rvResults.setAdapter(rvIngredientAdapter);
                     List<Ingredient> filteredList = ingredients.stream()
                             .filter(ingredient -> ingredient.getStrIngredient().toLowerCase().contains(query))
@@ -121,7 +130,6 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
 
         return view;
     }

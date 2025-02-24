@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,7 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.available_category_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.country_item, parent, false);
         return new RVCountriesAdapter.ViewHolder(view);
     }
 
@@ -43,10 +42,8 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
 
         Country country = countries.get(position);
 
-        holder.categoryName.setText(country.getStrArea());
-//        Glide.with(holder.itemView.getContext())
-//                .load(country.getStrCategoryThumb())
-//                .into(holder.categoryImg);
+        holder.countryName.setText(country.getStrArea());
+
     }
 
     @Override
@@ -56,14 +53,12 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView categoryImg;
-        TextView categoryName;
+        TextView countryName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            categoryImg = itemView.findViewById(R.id.iv_category_img);
-            categoryName = itemView.findViewById(R.id.tv_category_name);
+            countryName = itemView.findViewById(R.id.tv_country_name);
 
         }
     }

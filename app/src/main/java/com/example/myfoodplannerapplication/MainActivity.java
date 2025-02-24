@@ -1,5 +1,6 @@
 package com.example.myfoodplannerapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     private FloatingActionButton fabAdd;
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = getSharedPreferences("userData", MODE_PRIVATE);
+        boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
