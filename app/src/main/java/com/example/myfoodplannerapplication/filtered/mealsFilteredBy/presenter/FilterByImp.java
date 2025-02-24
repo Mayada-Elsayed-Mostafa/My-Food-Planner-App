@@ -20,7 +20,6 @@ public class FilterByImp implements FilterBy {
 
     @Override
     public void getCategories() {
-
         mealRepository.getMealsByFiltersOverNetwork(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe();

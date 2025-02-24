@@ -1,5 +1,6 @@
 package com.example.myfoodplannerapplication.favoritemeals.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +29,6 @@ public class FavoriteFragment extends Fragment implements OnFavMealClickListener
     FavoriteMealsImp favoriteMealsImp;
     RVFavMealsAdapter rvFavMealsAdapter;
     RecyclerView recyclerView;
-    OnFavMealClickListener onFavMealClickListener;
 
     public FavoriteFragment() {
         // Required empty public constructor
@@ -41,6 +41,7 @@ public class FavoriteFragment extends Fragment implements OnFavMealClickListener
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,29 +57,25 @@ public class FavoriteFragment extends Fragment implements OnFavMealClickListener
         favoriteMealsImp.getFavMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 mealList -> {
                     rvFavMealsAdapter.setList(mealList);
-                    rvFavMealsAdapter.notifyDataSetChanged();
                 },
                 throwable -> {
-                    Log.d("TAG", "onFavMealClicked: ");
+                    Log.d("TAG", "onFavMealClicked: " + throwable.getMessage());
                 });
-
 
         return view;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onFavMealClicked(InspirationMeal inspirationMeal) {
-
         favoriteMealsImp.delete(inspirationMeal);
         Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
-
         favoriteMealsImp.getFavMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 updatedMealList -> {
                     rvFavMealsAdapter.setList(updatedMealList);
-                    rvFavMealsAdapter.notifyDataSetChanged();
-                }
-                , throwable -> {
-                    Log.d("TAG", "onFavMealClicked: ");
+                },
+                throwable -> {
+                    Log.d("TAG", "onFavMealClicked: " + throwable.getMessage());
                 });
 
 

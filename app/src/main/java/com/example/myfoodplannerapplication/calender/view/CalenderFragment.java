@@ -1,5 +1,6 @@
 package com.example.myfoodplannerapplication.calender.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,45 +66,33 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         return view;
     }
 
+    @SuppressLint("CheckResult")
     private void loadMealsForSelectedDate(String selectedDate) {
         Observable<List<WeekMeals>> mealObservable = calendarImp.getMealsForDate(selectedDate);
-        if (mealObservable != null) {
-            mealObservable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(mealList -> {
-                        if (mealList != null && !mealList.isEmpty()) {
-                            Log.d("TAG", "Meals found: " + mealList.size());
-                            showBottomSheet(mealList); // هنا نعرض الـ BottomSheet
-                        } else {
-                            Log.d("TAG", "No meals found for the selected date.");
-                        }
-                    }, throwable -> {
-                        Log.d("TAG", "Error: " + throwable.getMessage());
-                    });
-        } else {
-            Log.e("TAG", "The Observable returned by getMealsForDate() is null");
-        }
+        mealObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mealList -> showBottomSheet(mealList)
+                        , throwable -> {
+                            Log.d("TAG", "Error: " + throwable.getMessage());
+                        });
     }
 
-    // دالة لعرض BottomSheet
     private void showBottomSheet(List<WeekMeals> mealList) {
         BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(mealList);
         bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onMealClicked(WeekMeals meals) {
         calendarImp.delete(meals);
         Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
 
         calendarImp.getMealsForDate(meals.getDay()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(updatedMealList -> {
-                            calendarAdapter.setList(updatedMealList);
-                            calendarAdapter.notifyDataSetChanged();
-                        }
+                .subscribe(updatedMealList -> calendarAdapter.setList(updatedMealList)
                         , throwable -> {
-                            Log.d("TAG", "onPlanMealClicked: ");
+                            Log.d("TAG", "onPlanMealClicked: " + throwable.getMessage());
                         });
     }
 
