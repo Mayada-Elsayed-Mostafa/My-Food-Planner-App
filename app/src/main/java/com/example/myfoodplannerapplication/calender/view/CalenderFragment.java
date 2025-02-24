@@ -16,7 +16,7 @@ import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.calender.presenter.CalendarImp;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.model.MealRepository;
-import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
 import java.util.ArrayList;
@@ -72,24 +72,6 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     }
 
 
-    @Override
-    public void onMealClicked(MealsOfWeek mealsOfWeek) {
-
-        calendarImp.delete(mealsOfWeek);
-        Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
-
-        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(updatedMealList -> {
-                            calendarAdapter.setList(updatedMealList);
-                            calendarAdapter.notifyDataSetChanged();
-                        }
-                        , throwable -> {
-                            Log.d("TAG", "onPlanMealClicked: ");
-                        });
-
-
-    }
-
     private void loadMealsForSelectedDate(String selectedDate) {
         calendarImp.getPlanMeals()
                 .subscribeOn(Schedulers.io())
@@ -100,5 +82,20 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
                 }, throwable -> {
                     Log.d("TAG", "Error: " + throwable.getMessage());
                 });
+    }
+
+    @Override
+    public void onMealClicked(WeekMeals meals) {
+        calendarImp.delete(meals);
+        Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
+
+        calendarImp.getPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(updatedMealList -> {
+                            calendarAdapter.setList(updatedMealList);
+                            calendarAdapter.notifyDataSetChanged();
+                        }
+                        , throwable -> {
+                            Log.d("TAG", "onPlanMealClicked: ");
+                        });
     }
 }

@@ -3,6 +3,7 @@ package com.example.myfoodplannerapplication.calender.presenter;
 import com.example.myfoodplannerapplication.calender.view.CalenderFragment;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 
 import java.util.List;
 
@@ -18,17 +19,12 @@ public class CalendarImp implements Calendar {
     }
 
     @Override
-    public Observable<List<MealsOfWeek>> getPlanMeals() {
+    public Observable<List<WeekMeals>> getPlanMeals() {
         return mealRepository.getMealsOfWeek();
     }
 
-//    @Override
-//    public Observable<List<MealsOfWeek>> getMealsForDate(String selectedDate) {
-//        return mealRepository.getMealsForDate(selectedDate);
-//    }
-
     @Override
-    public void delete(MealsOfWeek mealsOfWeek) {
-        mealRepository.deleteFromPlan(mealsOfWeek);
+    public void delete(WeekMeals meals) {
+        mealRepository.deleteFromWeeklyPlan(meals);
     }
 }

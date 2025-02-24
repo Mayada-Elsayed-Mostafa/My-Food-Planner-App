@@ -8,6 +8,7 @@ import androidx.room.Query;
 
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public interface MealDao {
     void deleteMeal(InspirationMeal meal);
 
 
-    @Query("SELECT * FROM plantable")
-    Observable<List<MealsOfWeek>> getMealsOfWeek();
+    @Query("SELECT * FROM weekplantable")
+    Observable<List<WeekMeals>> getMeals();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMealsOfWeek(MealsOfWeek meals);
@@ -35,7 +36,13 @@ public interface MealDao {
     @Delete
     void deleteMealsOfWeek(MealsOfWeek meals);
 
-    @Query("SELECT * FROM plantable WHERE day = :selectedDate")
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMealToWeek(WeekMeals meals);
+
+    @Delete
+    void deleteMealFromWeek(WeekMeals meals);
+
+    @Query("SELECT * FROM weekplantable WHERE day = :selectedDate")
     Observable<List<MealsOfWeek>> getMealsForDate(String selectedDate);
 }
 

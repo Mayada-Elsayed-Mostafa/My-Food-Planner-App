@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.core.Single;
 public class MealRepository {
 
     private static MealRepository mealRepository = null;
-
     private MealRemoteDataSource mealRemoteDataSource;
     private MealLocalDataSource mealLocalDataSource;
 
@@ -31,8 +30,8 @@ public class MealRepository {
         return mealLocalDataSource.getMeal();
     }
 
-    public Observable<List<MealsOfWeek>> getMealsOfWeek() {
-        return mealLocalDataSource.getMealsOfWeek();
+    public Observable<List<WeekMeals>> getMealsOfWeek() {
+        return mealLocalDataSource.getMeals();
     }
 
     public Single<InspirationMealResponse> getMealFromNetwork() {
@@ -53,6 +52,14 @@ public class MealRepository {
 
     public void insertToPlan(MealsOfWeek mealsOfWeek) {
         mealLocalDataSource.insertToPlan(mealsOfWeek);
+    }
+
+    public void insertToWeeklyPlan(WeekMeals meals) {
+        mealLocalDataSource.insertToWeeklyPlan(meals);
+    }
+
+    public void deleteFromWeeklyPlan(WeekMeals meals) {
+        mealLocalDataSource.deleteFromWeeklyPlan(meals);
     }
 
     public void deleteFromPlan(MealsOfWeek mealsOfWeek) {

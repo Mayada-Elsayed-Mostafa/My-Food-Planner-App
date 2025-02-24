@@ -3,7 +3,7 @@ package com.example.myfoodplannerapplication.details.presenter;
 import com.example.myfoodplannerapplication.details.view.MealDetailsView;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
-import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 
 public class MealDetailsImp implements MealDetails {
 
@@ -21,8 +21,8 @@ public class MealDetailsImp implements MealDetails {
     }
 
     @Override
-    public void addToCalendar(MealsOfWeek mealsOfWeek) {
-        mealRepository.insertToPlan(mealsOfWeek);
+    public void addToCalendar(WeekMeals meals) {
+        mealRepository.insertToWeeklyPlan(meals);
 
     }
 

@@ -1,15 +1,16 @@
 package com.example.myfoodplannerapplication.details.view;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.details.presenter.MealDetailsImp;
 import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
-import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,7 +36,6 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     ImageView addToFav, addToCalendar;
     MealDetailsImp mealDetailsImp;
     InspirationMeal meal;
-    MealsOfWeek mealsOfWeek;
     WebView webView;
 
 
@@ -60,7 +60,7 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
         addToCalendar = view.findViewById(R.id.add_to_calendar);
 
         meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
-        MealsOfWeek mealsOfWeek;
+        WeekMeals meals;
 
 
         String mealName = meal.getStrMeal();
@@ -99,13 +99,37 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
             addToFav.setImageResource(R.drawable.bookmark_added);
             onAddFavMealDetailsClicked(meal);
         });
-        addToCalendar.setOnClickListener(v -> {
-            showDatePickerDialog();
+
+
+        addToCalendar.setOnClickListener(v2 -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            monthOfYear = monthOfYear + 1;
+
+                            String selectedDate = dayOfMonth + "/" + monthOfYear + "/" + year;
+
+                            WeekMeals weekMeal = new WeekMeals();
+                            weekMeal.setId(meal.getIdMeal());
+                            weekMeal.setDay(selectedDate);
+                            weekMeal.setType("Dinner");
+                            weekMeal.setMeal(meal);
+
+                            MealLocalDataSource.getInstance(getContext()).insertToWeeklyPlan(weekMeal);
+                        }
+                    },
+                    Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH),
+                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            );
+
+            datePickerDialog.show();
             Snackbar.make(view, "Done", Snackbar.LENGTH_LONG).show();
             addToCalendar.setImageResource(R.drawable.calendar_added);
         });
 
-        loadYouTubeVideo(meal.getStrYoutube());
+        loadYouTubeVideo(mealVideo);
 
         return view;
     }
@@ -126,31 +150,11 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     }
 
     @Override
-    public void onAddCalendarMealDetailsClicked(MealsOfWeek mealsOfWeek) {
-        mealDetailsImp.addToCalendar(mealsOfWeek);
+    public void onAddCalendarMealDetailsClicked(WeekMeals meals) {
+        mealDetailsImp.addToCalendar(meals);
     }
 
-    private void showDatePickerDialog() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, selectedYear, selectedMonth, selectedDay) -> {
-            String selectedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-
-            Log.d("TAG", "showDatePickerDialog: " + selectedDate);
-
-            mealsOfWeek = new MealsOfWeek(selectedDate, meal.getStrMeal(), meal.getStrMealThumb(), meal.getIdMeal(), meal.getStrCategory(), meal.getStrArea(), meal.getStrInstructions(), meal.getStrYoutube(),
-                    meal.getStrIngredient1(), meal.getStrIngredient2(), meal.getStrIngredient3(), meal.getStrIngredient4(), meal.getStrIngredient5(), meal.getStrIngredient6(), meal.getStrIngredient7(), meal.getStrIngredient8(), meal.getStrIngredient9(), meal.getStrIngredient10(), meal.getStrIngredient11(), meal.getStrIngredient12(), meal.getStrIngredient13(), meal.getStrIngredient14(), meal.getStrIngredient15(), meal.getStrIngredient16(), meal.getStrIngredient17(), meal.getStrIngredient18(), meal.getStrIngredient19(), meal.getStrIngredient20());
-
-            mealDetailsImp.addToCalendar(mealsOfWeek);
-
-        }, year, month, day);
-
-        datePickerDialog.show();
-    }
-
+    @SuppressLint("SetJavaScriptEnabled")
     private void loadYouTubeVideo(String url) {
         if (!TextUtils.isEmpty(url)) {
             String videoId = url.split("v=")[1];

@@ -4,16 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
-import com.example.myfoodplannerapplication.model.MealsOfWeek;
+import com.example.myfoodplannerapplication.model.WeekMeals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +20,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
 
     private Context context;
-    private List<MealsOfWeek> mealsOfWeeks = new ArrayList<>();
+    private List<WeekMeals> mealsOfWeeks = new ArrayList<>();
     private OnCalendarClickListener onCalendarClickListener;
 
-    public CalendarAdapter(List<MealsOfWeek> _mealsOfWeeks, Context context, OnCalendarClickListener _onCalendarClickListener) {
+    public CalendarAdapter(List<WeekMeals> _mealsOfWeeks, Context context, OnCalendarClickListener _onCalendarClickListener) {
         this.mealsOfWeeks = _mealsOfWeeks;
         this.context = context;
         this.onCalendarClickListener = _onCalendarClickListener;
     }
 
-    public void setList(List<MealsOfWeek> _mealsOfWeeks) {
+    public void setList(List<WeekMeals> _mealsOfWeeks) {
         this.mealsOfWeeks = _mealsOfWeeks;
         notifyDataSetChanged();
     }
@@ -47,15 +45,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if (mealsOfWeeks != null && !mealsOfWeeks.isEmpty()) {
-            MealsOfWeek meal = mealsOfWeeks.get(position);
-            Glide.with(context)
-                    .load(meal.getStrMealThumb())
-                    .into(holder.mealIV);
-            holder.titleTV.setText(meal.getStrMeal());
-
-            holder.remove.setOnClickListener(view -> {
-                onCalendarClickListener.onMealClicked(meal);
-            });
+            WeekMeals meal = mealsOfWeeks.get(position);
+//            Glide.with(context)
+//                    .load(meal.getStrMealThumb())
+//                    .into(holder.mealIV);
+//            holder.titleTV.setText(meal.getStrMeal());
+//
+//            holder.remove.setOnClickListener(view -> {
+//                onCalendarClickListener.onMealClicked(meal);
+//            });
         }
 
     }
@@ -68,7 +66,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mealIV;
         TextView titleTV;
-        Button remove;
+        ImageView remove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
