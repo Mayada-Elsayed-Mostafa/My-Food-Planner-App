@@ -77,8 +77,8 @@ public class MealRemoteDataSource {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ByFilterResponse> getMealsByCategoriesOverNetwork(String category) {
-        return inspirationMealService.getMealsByCategory(category)
+    public Single<ByFilterResponse> getMealsByCategoriesOverNetwork(String filter) {
+        return inspirationMealService.getMealsByCategory(filter)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread());
     }

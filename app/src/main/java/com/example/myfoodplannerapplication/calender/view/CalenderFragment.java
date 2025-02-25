@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -22,7 +23,9 @@ import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -35,6 +38,7 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     CalendarImp calendarImp;
     CalendarAdapter calendarAdapter;
     RecyclerView recyclerView;
+    TextView selectedDayName;
 
     public CalenderFragment() {
         // Required empty public constructor
@@ -51,6 +55,7 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
 
         View view = inflater.inflate(R.layout.fragment_calender, container, false);
 
+        selectedDayName = view.findViewById(R.id.selected_day_name);
         recyclerView = view.findViewById(R.id.mealPlansRecyclerView);
         calendarAdapter = new CalendarAdapter(new ArrayList<>(), getContext(), this);
         recyclerView.setAdapter(calendarAdapter);
@@ -61,6 +66,7 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
             loadMealsForSelectedDate(selectedDate);
+            displayDayName(year, month, dayOfMonth);
         });
 
         return view;
@@ -96,5 +102,16 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         CalenderFragmentDirections.ActionCalenderFragmentToMealDetailsFragment action =
                 CalenderFragmentDirections.actionCalenderFragmentToMealDetailsFragment(meal);
         Navigation.findNavController(getView()).navigate(action);
+    }
+
+    private void displayDayName(int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE", getResources().getConfiguration().locale);
+        String dayName = simpleDateFormat.format(calendar.getTime());
+
+        selectedDayName.setVisibility(View.VISIBLE);
+        selectedDayName.setText(dayName);
     }
 }

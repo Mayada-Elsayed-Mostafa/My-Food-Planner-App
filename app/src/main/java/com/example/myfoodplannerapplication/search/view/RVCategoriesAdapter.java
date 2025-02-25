@@ -50,7 +50,7 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
                 .load(category.getStrCategoryThumb())
                 .into(holder.categoryImg);
         holder.categoryImg.setOnClickListener(v -> {
-            listener.onAddSearchClicked(category);
+            listener.onAddSearchClicked(category.getStrCategory());
         });
     }
 

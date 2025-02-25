@@ -175,9 +175,9 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
     }
 
     @Override
-    public void onAddSearchClicked(Category category) {
+    public void onAddSearchClicked(String filter) {
         SearchFragmentDirections.ActionSearchFragmentToFilterByFragment action =
-                SearchFragmentDirections.actionSearchFragmentToFilterByFragment(category);
+                SearchFragmentDirections.actionSearchFragmentToFilterByFragment(filter);
 
         Navigation.findNavController(getView()).navigate(action);
     }

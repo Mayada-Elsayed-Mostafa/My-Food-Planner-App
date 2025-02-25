@@ -1,6 +1,5 @@
 package com.example.myfoodplannerapplication.model;
 
-import com.example.myfoodplannerapplication.filtered.mealsFilteredBy.presenter.FilterBy;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

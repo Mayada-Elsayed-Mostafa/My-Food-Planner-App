@@ -75,8 +75,8 @@ public class MealRepository {
         return mealRemoteDataSource.getIngredientOverNetwork();
     }
 
-    public Single<ByFilterResponse> getMealsByFiltersOverNetwork(String category) {
-        return mealRemoteDataSource.getMealsByCategoriesOverNetwork(category);
+    public Single<ByFilterResponse> getMealsByFiltersOverNetwork(String filter) {
+        return mealRemoteDataSource.getMealsByCategoriesOverNetwork(filter);
     }
 
 }
