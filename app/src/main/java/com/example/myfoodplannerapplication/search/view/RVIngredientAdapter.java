@@ -40,9 +40,7 @@ public class RVIngredientAdapter extends RecyclerView.Adapter<RVIngredientAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         Ingredient ingredient = ingredients.get(position);
-
         holder.categoryName.setText(ingredient.getStrIngredient());
         Glide.with(holder.itemView.getContext())
                 .load("https://www.themealdb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png")
@@ -60,10 +58,8 @@ public class RVIngredientAdapter extends RecyclerView.Adapter<RVIngredientAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             ingredientImg = itemView.findViewById(R.id.iv_category_img);
             categoryName = itemView.findViewById(R.id.tv_category_name);
-
         }
     }
 

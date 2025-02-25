@@ -38,9 +38,7 @@ public class RVCountryAdapter extends RecyclerView.Adapter<RVCountryAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         Country country = countries.get(position);
-
         holder.countryName.setText(country.getStrArea());
     }
 
@@ -58,9 +56,7 @@ public class RVCountryAdapter extends RecyclerView.Adapter<RVCountryAdapter.View
         TextView countryName;
 
         public ViewHolder(@NonNull View itemView) {
-
             super(itemView);
-
             countryName = itemView.findViewById(R.id.tv_country_name);
 
         }

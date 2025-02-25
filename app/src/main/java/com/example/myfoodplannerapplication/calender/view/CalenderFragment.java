@@ -72,15 +72,10 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         mealObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mealList -> showBottomSheet(mealList)
-                        , throwable -> {
-                            Log.d("TAG", "Error: " + throwable.getMessage());
-                        });
-    }
-
-    private void showBottomSheet(List<WeekMeals> mealList) {
-        BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(mealList);
-        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+                .subscribe(mealList -> calendarAdapter.setList(mealList)
+                        , throwable ->
+                                Log.d("TAG", "Error: " + throwable.getMessage())
+                );
     }
 
     @SuppressLint("CheckResult")

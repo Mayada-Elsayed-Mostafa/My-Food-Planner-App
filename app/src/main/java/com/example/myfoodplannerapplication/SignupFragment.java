@@ -86,7 +86,6 @@ public class SignupFragment extends Fragment {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d("signupTag", "User created successfully");
 
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("name", name);
