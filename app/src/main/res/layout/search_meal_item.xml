@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/_16sdp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_16sdp">
 
 
     <androidx.cardview.widget.CardView
@@ -23,8 +23,7 @@
                 android:id="@+id/meal_iv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/food" />
+                android:scaleType="centerCrop" />
 
             <View
                 android:layout_width="match_parent"
@@ -40,7 +39,6 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:gravity="center"
-                android:text="Title"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"
                 android:textStyle="bold" />

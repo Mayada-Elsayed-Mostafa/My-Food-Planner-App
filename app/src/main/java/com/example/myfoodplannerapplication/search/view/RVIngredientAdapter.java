@@ -20,10 +20,12 @@ public class RVIngredientAdapter extends RecyclerView.Adapter<RVIngredientAdapte
 
     private Context context;
     List<Ingredient> ingredients;
+    private OnSearchClickListener listener;
 
-    public RVIngredientAdapter(Context context, List<Ingredient> _ingredients) {
+    public RVIngredientAdapter(Context context, List<Ingredient> _ingredients, OnSearchClickListener _listener) {
         this.context = context;
         this.ingredients = _ingredients;
+        this.listener = _listener;
     }
 
     public void setList(List<Ingredient> ingredientList) {
@@ -45,6 +47,9 @@ public class RVIngredientAdapter extends RecyclerView.Adapter<RVIngredientAdapte
         Glide.with(holder.itemView.getContext())
                 .load("https://www.themealdb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png")
                 .into(holder.ingredientImg);
+        holder.ingredientImg.setOnClickListener(v -> {
+            listener.onAddSearchClicked(ingredient.getStrIngredient());
+        });
     }
 
     @Override

@@ -109,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_plan" />
 
     <LinearLayout
-        android:id="@+id/btn_backup"
+        android:id="@+id/layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
@@ -128,6 +128,7 @@
             android:textSize="@dimen/_14sdp" />
 
         <ImageView
+            android:id="@+id/btn_backup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -143,10 +144,10 @@
         android:background="@color/my_light_tertiary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_backup" />
+        app:layout_constraintTop_toBottomOf="@id/layout3" />
 
     <LinearLayout
-        android:id="@+id/btn_restore"
+        android:id="@+id/layout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
@@ -165,6 +166,7 @@
             android:textSize="@dimen/_14sdp" />
 
         <ImageView
+            android:id="@+id/btn_restore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

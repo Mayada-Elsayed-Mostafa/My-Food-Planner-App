@@ -83,4 +83,16 @@ public class MealRemoteDataSource {
                 .subscribeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<ByFilterResponse> getMealsByCountryOverNetwork(String filter) {
+        return inspirationMealService.getMealsByCountry(filter)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ByFilterResponse> getMealsByIngredientsOverNetwork(String filter) {
+        return inspirationMealService.getMealsByIngredient(filter)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
 }

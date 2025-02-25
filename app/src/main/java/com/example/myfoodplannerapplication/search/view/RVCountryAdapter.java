@@ -18,10 +18,12 @@ public class RVCountryAdapter extends RecyclerView.Adapter<RVCountryAdapter.View
 
     private Context context;
     List<Country> countries;
+    private OnSearchClickListener listener;
 
-    public RVCountryAdapter(Context _context, List<Country> _countries) {
+    public RVCountryAdapter(Context _context, List<Country> _countries, OnSearchClickListener _listener) {
         this.context = _context;
         this.countries = _countries;
+        this.listener = _listener;
     }
 
     public void setList(List<Country> countryList) {
@@ -40,6 +42,9 @@ public class RVCountryAdapter extends RecyclerView.Adapter<RVCountryAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Country country = countries.get(position);
         holder.countryName.setText(country.getStrArea());
+        holder.countryName.setOnClickListener(v -> {
+            listener.onAddSearchClicked(country.getStrArea());
+        });
     }
 
     public void updateList(List<Country> newList) {

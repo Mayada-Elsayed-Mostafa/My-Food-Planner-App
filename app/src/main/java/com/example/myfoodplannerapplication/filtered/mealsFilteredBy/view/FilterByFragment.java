@@ -55,7 +55,10 @@ public class FilterByFragment extends Fragment implements FilterByView {
         Log.d("FilterByFragment", "Received filter: " + filter);
 
         filterByImp = new FilterByImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this, filter);
-        filterByImp.getCategories();
+        filterByImp.getMealsByCategory();
+        filterByImp.getMealsByCountry();
+        filterByImp.getMealsByIngredient();
+
         byFilterRV = view.findViewById(R.id.rv_by_filter);
         filterByAdapter = new FilterByAdapter(getContext(), new ArrayList<>());
         byFilterRV.setAdapter(filterByAdapter);

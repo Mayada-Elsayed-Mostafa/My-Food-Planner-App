@@ -28,8 +28,8 @@ public interface InspirationMealService {
     Single<ByFilterResponse> getMealsByCategory(@Query("c") String category);
 
     @GET("/api/json/v1/1/filter.php")
-    Single<CountryResponse> getMealsByCountry(@Query("a") String area);
+    Single<ByFilterResponse> getMealsByCountry(@Query("a") String area);
 
     @GET("/api/json/v1/1/filter.php")
-    Single<IngredientResponse> getMealsByIngredient(@Query("i") String ingredient);
+    Single<ByFilterResponse> getMealsByIngredient(@Query("i") String ingredient);
 }

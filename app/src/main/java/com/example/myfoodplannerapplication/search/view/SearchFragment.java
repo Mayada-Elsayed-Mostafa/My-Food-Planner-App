@@ -78,8 +78,8 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
         searchImp.getIngredients();
 
         rvCategoriesAdapter = new RVCategoriesAdapter(getContext(), new ArrayList<>(), this);
-        rvCountryAdapter = new RVCountryAdapter(getContext(), new ArrayList<>());
-        rvIngredientAdapter = new RVIngredientAdapter(getContext(), new ArrayList<>());
+        rvCountryAdapter = new RVCountryAdapter(getContext(), new ArrayList<>(), this);
+        rvIngredientAdapter = new RVIngredientAdapter(getContext(), new ArrayList<>(), this);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override

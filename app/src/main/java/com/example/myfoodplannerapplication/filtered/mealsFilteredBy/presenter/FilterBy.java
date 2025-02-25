@@ -2,5 +2,7 @@ package com.example.myfoodplannerapplication.filtered.mealsFilteredBy.presenter;
 
 public interface FilterBy {
 
-    void getCategories();
+    void getMealsByCategory();
+    void getMealsByCountry();
+    void getMealsByIngredient();
 }

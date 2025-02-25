@@ -36,7 +36,7 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.available_category_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_meal_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -71,8 +71,8 @@ public class RVCategoriesAdapter extends RecyclerView.Adapter<RVCategoriesAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            categoryImg = itemView.findViewById(R.id.iv_category_img);
-            categoryName = itemView.findViewById(R.id.tv_category_name);
+            categoryImg = itemView.findViewById(R.id.meal_iv);
+            categoryName = itemView.findViewById(R.id.title_tv);
 
         }
     }
