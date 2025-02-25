@@ -76,4 +76,21 @@ public class FilterByImp implements FilterBy {
                     filterByFragment.setFilter(new ArrayList<>());
                 });
     }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void getMealsById() {
+        mealRepository.getMealsByFilterOfIdOverNetwork(filter)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(inspirationMealResponse -> {
+                    if (inspirationMealResponse != null && inspirationMealResponse.getMeals() != null) {
+                        filterByFragment.onMealClicked(inspirationMealResponse.getMeals().get(0));
+                    } else {
+                        Log.e("FilterByImp", "No meal found with this ID");
+                    }
+                }, throwable -> {
+                    Log.e("FilterByImp", "Error fetching meal by ID: " + throwable.getMessage());
+                });
+    }
 }

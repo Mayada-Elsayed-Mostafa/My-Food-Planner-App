@@ -65,7 +65,6 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
         rvCategories = view.findViewById(R.id.rv_list_of_categories);
         rvCountries = view.findViewById(R.id.rv_list_of_countries);
         rvIngredients = view.findViewById(R.id.rv_list_of_ingredients);
-
         mealIMG = view.findViewById(R.id.meal_iv);
 
         mealOfTheDayImp = new MealOfTheDayImp(MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
@@ -128,16 +127,10 @@ public class HomeFragment extends Fragment implements MealOfTheDayView, OnMealOf
     }
 
     @Override
-    public void showErrMsg(String err) {
-
-    }
-
-    @Override
     public void onAddMealClicked(InspirationMeal meal) {
         HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
                 HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(meal);
         Navigation.findNavController(getView()).navigate(action);
     }
-
 
 }

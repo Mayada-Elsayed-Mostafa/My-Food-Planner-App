@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MealRemoteDataSource {
 
-    public static String BASE_URL = "https://www.themealdb.com/";
+    public static String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     private InspirationMealService inspirationMealService;
     private static MealRemoteDataSource remoteDataSource = null;
 
@@ -91,6 +91,12 @@ public class MealRemoteDataSource {
 
     public Single<ByFilterResponse> getMealsByIngredientsOverNetwork(String filter) {
         return inspirationMealService.getMealsByIngredient(filter)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<InspirationMealResponse> getMealsByIdOverNetwork(String filter) {
+        return inspirationMealService.getMealsById(filter)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread());
     }

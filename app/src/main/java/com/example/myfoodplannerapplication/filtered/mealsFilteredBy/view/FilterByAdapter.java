@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.model.FilterBy;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
 
 import java.util.List;
 
@@ -20,18 +21,16 @@ public class FilterByAdapter extends RecyclerView.Adapter<FilterByAdapter.ViewHo
     private Context context;
     private List<FilterBy> filterByList;
 
-    public FilterByAdapter(Context context, List<FilterBy> _filterByList) {
+    private OnFilterByClickListener listener;
+
+    public FilterByAdapter(Context context, List<FilterBy> _filterByList, OnFilterByClickListener _listener) {
         this.context = context;
         this.filterByList = _filterByList;
+        this.listener = _listener;
     }
 
     public void setList(List<FilterBy> _filterByList) {
         this.filterByList = _filterByList;
-        notifyDataSetChanged();
-    }
-
-    public void updateList(List<FilterBy> newList) {
-        this.filterByList = newList;
         notifyDataSetChanged();
     }
 
@@ -51,6 +50,10 @@ public class FilterByAdapter extends RecyclerView.Adapter<FilterByAdapter.ViewHo
         Glide.with(holder.itemView.getContext())
                 .load(filter.getStrMealThumb())
                 .into(holder.categoryImg);
+
+        holder.categoryImg.setOnClickListener(v -> {
+            listener.onMealClicked(new InspirationMeal());
+        });
 
 
     }

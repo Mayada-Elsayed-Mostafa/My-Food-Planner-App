@@ -7,5 +7,4 @@ import java.util.List;
 public interface CategoriesView {
     void setCategory(List<Category> categoryList);
 
-    void showErrMsg(String err);
 }

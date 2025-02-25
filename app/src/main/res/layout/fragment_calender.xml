@@ -6,6 +6,13 @@
     android:padding="@dimen/_8sdp"
     android:weightSum="5">
 
+    <ImageView
+        android:id="@+id/no_connect_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_first"
+        android:visibility="gone" />
+
     <android.widget.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"

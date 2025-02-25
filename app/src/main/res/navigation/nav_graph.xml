@@ -82,6 +82,12 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calenderFragment"
+            app:destination="@id/calenderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment3"
+            app:destination="@id/profileFragment" />
 
     </fragment>
 
@@ -143,6 +149,12 @@
         <action
             android:id="@+id/action_calenderFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -156,6 +168,9 @@
             android:id="@+id/action_favoriteFragment_to_mealDetailsFragment"
             app:argType="com.example.myfoodplannerapplication.model.InspirationMeal"
             app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -179,6 +194,9 @@
             android:name="filter"
             app:argType="string"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_filterByFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
     </fragment>
 
 </navigation>

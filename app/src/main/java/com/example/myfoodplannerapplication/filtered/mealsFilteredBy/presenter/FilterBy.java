@@ -5,4 +5,5 @@ public interface FilterBy {
     void getMealsByCategory();
     void getMealsByCountry();
     void getMealsByIngredient();
+    void getMealsById();
 }

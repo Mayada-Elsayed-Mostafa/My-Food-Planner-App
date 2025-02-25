@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.example.myfoodplannerapplication.R;
 import com.example.myfoodplannerapplication.database.MealLocalDataSource;
 import com.example.myfoodplannerapplication.filtered.mealsFilteredBy.presenter.FilterByImp;
 import com.example.myfoodplannerapplication.model.FilterBy;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FilterByFragment extends Fragment implements FilterByView {
+public class FilterByFragment extends Fragment implements FilterByView, OnFilterByClickListener {
 
     FilterByAdapter filterByAdapter;
     RecyclerView byFilterRV;
@@ -58,9 +60,10 @@ public class FilterByFragment extends Fragment implements FilterByView {
         filterByImp.getMealsByCategory();
         filterByImp.getMealsByCountry();
         filterByImp.getMealsByIngredient();
+        filterByImp.getMealsById();
 
         byFilterRV = view.findViewById(R.id.rv_by_filter);
-        filterByAdapter = new FilterByAdapter(getContext(), new ArrayList<>());
+        filterByAdapter = new FilterByAdapter(getContext(), new ArrayList<>(), this);
         byFilterRV.setAdapter(filterByAdapter);
         byFilterRV.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -76,5 +79,12 @@ public class FilterByFragment extends Fragment implements FilterByView {
         } else {
             Log.e("Tag", "No filters available to display");
         }
+    }
+
+    @Override
+    public void onMealClicked(InspirationMeal meal) {
+        FilterByFragmentDirections.ActionFilterByFragmentToMealDetailsFragment action =
+                FilterByFragmentDirections.actionFilterByFragmentToMealDetailsFragment(meal);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

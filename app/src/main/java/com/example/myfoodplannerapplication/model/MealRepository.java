@@ -87,4 +87,8 @@ public class MealRepository {
         return mealRemoteDataSource.getMealsByIngredientsOverNetwork(filter);
     }
 
+    public Single<InspirationMealResponse> getMealsByFilterOfIdOverNetwork(String filter) {
+        return mealRemoteDataSource.getMealsByIdOverNetwork(filter);
+    }
+
 }

@@ -51,6 +51,10 @@ public class InspirationMeal implements Parcelable {
     private String strIngredient19;
     private String strIngredient20;
 
+    public InspirationMeal() {
+
+    }
+
     public InspirationMeal(String strMealThumb, String strMeal) {
         this.strMealThumb = strMealThumb;
         this.strMeal = strMeal;
