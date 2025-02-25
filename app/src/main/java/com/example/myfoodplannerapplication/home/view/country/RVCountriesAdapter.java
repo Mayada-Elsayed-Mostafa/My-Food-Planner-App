@@ -43,7 +43,6 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
         Country country = countries.get(position);
 
         holder.countryName.setText(country.getStrArea());
-
     }
 
     @Override

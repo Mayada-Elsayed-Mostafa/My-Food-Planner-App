@@ -55,7 +55,7 @@ public class RVFavMealsAdapter extends RecyclerView.Adapter<RVFavMealsAdapter.Vi
             holder.mealIV.setOnClickListener(v -> {
                 InspirationMeal selectedMeal = meal;
                 FavoriteFragmentDirections.ActionFavoriteFragmentToMealDetailsFragment action =
-                        FavoriteFragmentDirections.actionFavoriteFragmentToMealDetailsFragment(selectedMeal);
+                        FavoriteFragmentDirections.actionFavoriteFragmentToMealDetailsFragment(selectedMeal, "");
                 Navigation.findNavController(v).navigate(action);
 
 

@@ -85,7 +85,7 @@ public class FilterByImp implements FilterBy {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(inspirationMealResponse -> {
                     if (inspirationMealResponse != null && inspirationMealResponse.getMeals() != null) {
-                        filterByFragment.onMealClicked(inspirationMealResponse.getMeals().get(0));
+                        filterByFragment.onMealClicked(filter);
                     } else {
                         Log.e("FilterByImp", "No meal found with this ID");
                     }

@@ -52,7 +52,7 @@ public class FilterByAdapter extends RecyclerView.Adapter<FilterByAdapter.ViewHo
                 .into(holder.categoryImg);
 
         holder.categoryImg.setOnClickListener(v -> {
-            listener.onMealClicked(new InspirationMeal());
+            listener.onMealClicked(filter.getIdMeal());
         });
 
 

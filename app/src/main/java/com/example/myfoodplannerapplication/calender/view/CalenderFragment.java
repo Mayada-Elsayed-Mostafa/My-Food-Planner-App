@@ -127,7 +127,7 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     @Override
     public void onImageMealClicked(InspirationMeal meal) {
         CalenderFragmentDirections.ActionCalenderFragmentToMealDetailsFragment action =
-                CalenderFragmentDirections.actionCalenderFragmentToMealDetailsFragment(meal);
+                CalenderFragmentDirections.actionCalenderFragmentToMealDetailsFragment(meal, "");
         Navigation.findNavController(getView()).navigate(action);
     }
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 
 import java.util.ArrayList;
@@ -47,13 +48,14 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
         if (mealsOfWeeks != null && !mealsOfWeeks.isEmpty()) {
             WeekMeals meal = mealsOfWeeks.get(position);
+            InspirationMeal meal1 = meal.getMeal();
             Glide.with(context)
                     .load(meal.getMeal().getStrMealThumb())
                     .into(holder.mealIV);
             holder.titleTV.setText(meal.getMeal().getStrMeal());
 
-            holder.remove.setOnClickListener(view -> {
-                onCalendarClickListener.onMealClicked(meal);
+            holder.mealIV.setOnClickListener(view -> {
+                onCalendarClickListener.onImageMealClicked(meal1);
             });
         }
 

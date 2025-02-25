@@ -53,10 +53,9 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_details, container, false);
 
+        initializeViews(view);
         initializePreferences();
         initializeMealDetails();
-        initializeViews(view);
-        setMealDetails();
 
         return view;
     }
@@ -70,7 +69,14 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
         mealDetailsImp = new MealDetailsImp(
                 MealRepository.getInstance(MealLocalDataSource.getInstance(getContext()), MealRemoteDataSource.getInstance()), this);
 
-        meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
+        String id = MealDetailsFragmentArgs.fromBundle(getArguments()).getId();
+
+        if (id.isEmpty()) {
+            meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
+            setMealDetails();
+        } else {
+            mealDetailsImp.getMealById(id);
+        }
     }
 
     private void initializeViews(View view) {
@@ -162,5 +168,10 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     @Override
     public void onAddCalendarMealDetailsClicked(WeekMeals meals) {
         mealDetailsImp.addToCalendar(meals);
+    }
+
+    public void displayMeal(InspirationMeal _meal) {
+        this.meal = _meal;
+        setMealDetails();
     }
 }

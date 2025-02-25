@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment3"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_filterByFragment"
+            app:destination="@id/filterByFragment" />
 
     </fragment>
 
@@ -101,6 +104,9 @@
             android:name="meal"
             app:argType="com.example.myfoodplannerapplication.model.InspirationMeal"
             app:nullable="false" />
+        <argument
+            android:name="id"
+            app:argType="string" />
 
     </fragment>
 

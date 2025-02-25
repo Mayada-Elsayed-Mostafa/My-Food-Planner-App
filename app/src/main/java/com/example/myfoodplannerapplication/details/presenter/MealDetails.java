@@ -7,4 +7,6 @@ public interface MealDetails {
     public void addToFav(InspirationMeal inspirationMeal);
 
     public void addToCalendar(WeekMeals meals);
+
+    void getMealById(String id);
 }

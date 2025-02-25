@@ -82,9 +82,10 @@ public class FilterByFragment extends Fragment implements FilterByView, OnFilter
     }
 
     @Override
-    public void onMealClicked(InspirationMeal meal) {
+    public void onMealClicked(String id) {
+        Log.d("Nav", "onMealClicked: ");
         FilterByFragmentDirections.ActionFilterByFragmentToMealDetailsFragment action =
-                FilterByFragmentDirections.actionFilterByFragmentToMealDetailsFragment(meal);
+                FilterByFragmentDirections.actionFilterByFragmentToMealDetailsFragment(new InspirationMeal(), id);
         Navigation.findNavController(getView()).navigate(action);
     }
 }

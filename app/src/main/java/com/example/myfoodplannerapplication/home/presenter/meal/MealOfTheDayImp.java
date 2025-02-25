@@ -25,8 +25,7 @@ public class MealOfTheDayImp implements MealOfTheDay {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        inspirationMealResponse -> mealOfTheDayView.setData(inspirationMealResponse.getMeals()),
-                        throwable -> mealOfTheDayView.showErrMsg("There was an error: " + throwable.getMessage())
+                        inspirationMealResponse -> mealOfTheDayView.setData(inspirationMealResponse.getMeals())
                 );
     }
 }
