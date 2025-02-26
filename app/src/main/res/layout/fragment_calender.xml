@@ -23,6 +23,7 @@
         android:background="@drawable/calendar_background"
         android:elevation="4dp" />
 
+
     <TextView
         android:id="@+id/selected_day_name"
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealPlansRecyclerView"

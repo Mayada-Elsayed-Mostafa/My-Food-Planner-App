@@ -39,7 +39,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fav_meal_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.plan_meal_item, parent, false);
         return new CalendarAdapter.ViewHolder(view);
     }
 
@@ -57,6 +57,12 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
             holder.mealIV.setOnClickListener(view -> {
                 onCalendarClickListener.onImageMealClicked(meal1);
             });
+            holder.remove.setOnClickListener(view -> {
+                onCalendarClickListener.onRemoveMealClicked(meal);
+            });
+            holder.backup.setOnClickListener(view -> {
+                onCalendarClickListener.onMealClicked(meal);
+            });
         }
 
     }
@@ -70,12 +76,14 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
         ImageView mealIV;
         TextView titleTV;
         ImageView remove;
+        ImageView backup;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mealIV = itemView.findViewById(R.id.fav_meal_iv);
             titleTV = itemView.findViewById(R.id.fav_title_tv);
             remove = itemView.findViewById(R.id.btn_remove);
+            backup = itemView.findViewById(R.id.btn_backup);
         }
     }
 }

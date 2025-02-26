@@ -24,10 +24,10 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
         seePlan = view.findViewById(R.id.btn_see_plan);
         seeFav = view.findViewById(R.id.btn_see_fav);
         userName = view.findViewById(R.id.tv_userNameProfile);
+
 
         userName.setText(preferences.getString("name", ""));
 
@@ -60,6 +61,7 @@ public class ProfileFragment extends Fragment {
         seeFav.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_favoriteFragment);
         });
+
 
         return view;
     }

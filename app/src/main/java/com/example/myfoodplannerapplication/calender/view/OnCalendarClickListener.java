@@ -6,6 +6,7 @@ import com.example.myfoodplannerapplication.model.WeekMeals;
 public interface OnCalendarClickListener {
 
     public void onMealClicked(WeekMeals meals);
+    public void onRemoveMealClicked(WeekMeals meals);
 
     public void onImageMealClicked(InspirationMeal inspirationMeal);
 }

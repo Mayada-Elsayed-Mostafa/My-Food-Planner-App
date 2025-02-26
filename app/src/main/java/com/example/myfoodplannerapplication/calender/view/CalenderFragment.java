@@ -28,6 +28,11 @@ import com.example.myfoodplannerapplication.model.InspirationMeal;
 import com.example.myfoodplannerapplication.model.MealRepository;
 import com.example.myfoodplannerapplication.model.WeekMeals;
 import com.example.myfoodplannerapplication.network.MealRemoteDataSource;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +52,10 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     private RecyclerView recyclerView;
     private TextView selectedDayName;
     private ImageView loginFirst;
+    FirebaseAuth firebaseAuth;
+    String userId;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference reference;
 
     public CalenderFragment() {
         // Required empty public constructor
@@ -61,12 +70,60 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calender, container, false);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         initializePreferences();
         initializeRecyclerView(view);
         setupCalendarView(view);
         toggleLoginState(view);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Meals");
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        userId = user.getUid();
+
         return view;
+    }
+
+    void backupData(WeekMeals meals) {
+        if (isLoggedIn) {
+            reference.child(userId).child("PlanMeals").child(meals.getId()).setValue(meals)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getContext(), "Data backed up successfully!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Failed to back up data!", Toast.LENGTH_SHORT).show();
+                        Log.e("BackupError", "Error backing up data: " + e.getMessage());
+                    });
+        } else {
+            Toast.makeText(getContext(), "Please log in to back up your data.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void restoreData() {
+        if (isLoggedIn) {
+            reference.child(userId).child("PlanMeals").get()
+                    .addOnSuccessListener(dataSnapshot -> {
+                        if (dataSnapshot.exists()) {
+                            List<WeekMeals> restoredMeals = new ArrayList<>();
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                WeekMeals meal = snapshot.getValue(WeekMeals.class);
+                                restoredMeals.add(meal);
+                            }
+                            calendarAdapter.setList(restoredMeals);
+                            Toast.makeText(getContext(), "Data restored successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "No backup data found.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Failed to restore data.", Toast.LENGTH_SHORT).show();
+                        Log.e("RestoreError", "Error restoring data: " + e.getMessage());
+                    });
+        } else {
+            Toast.makeText(getContext(), "Please log in to restore your data.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initializePreferences() {
@@ -114,6 +171,12 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
     @SuppressLint("CheckResult")
     @Override
     public void onMealClicked(WeekMeals meals) {
+        backupData(meals);
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onRemoveMealClicked(WeekMeals meals) {
         calendarImp.delete(meals);
         Toast.makeText(getContext(), "Meal Deleted", Toast.LENGTH_SHORT).show();
 
@@ -141,4 +204,5 @@ public class CalenderFragment extends Fragment implements OnCalendarClickListene
         selectedDayName.setVisibility(VISIBLE);
         selectedDayName.setText(dayName);
     }
+
 }

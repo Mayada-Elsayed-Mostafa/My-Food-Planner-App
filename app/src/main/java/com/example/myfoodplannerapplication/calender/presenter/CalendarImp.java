@@ -18,11 +18,6 @@ public class CalendarImp implements Calendar {
     }
 
     @Override
-    public Observable<List<WeekMeals>> getPlanMeals() {
-        return null;
-    }
-
-    @Override
     public Observable<List<WeekMeals>> getMealsForDate(String selectedDate) {
         return mealRepository.getMealsForDate(selectedDate);
     }
@@ -31,4 +26,5 @@ public class CalendarImp implements Calendar {
     public void delete(WeekMeals meals) {
         mealRepository.deleteFromWeeklyPlan(meals);
     }
+
 }
