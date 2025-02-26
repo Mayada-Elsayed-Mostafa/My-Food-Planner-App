@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,15 +17,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     boolean isLoggedIn;
     SharedPreferences preferences;
-    Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
-    private FloatingActionButton fabAdd;
     CoordinatorLayout layout;
 
     @Override
@@ -37,12 +33,8 @@ public class MainActivity extends AppCompatActivity {
         preferences = getSharedPreferences("userData", MODE_PRIVATE);
         isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         layout = findViewById(R.id.cor_layout);
-        fabAdd = findViewById(R.id.addFragment);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
@@ -50,16 +42,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNav, navController);
 
-        fabAdd.setOnClickListener(view -> {
-            navController.navigate(R.id.addFragment);
-        });
-
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.homeFragment || destination.getId() == R.id.searchFragment || destination.getId() == R.id.calenderFragment || destination.getId() == R.id.favoriteFragment) {
-                toolbar.setVisibility(View.VISIBLE);
                 layout.setVisibility(View.VISIBLE);
             } else {
-                toolbar.setVisibility(View.GONE);
                 layout.setVisibility(View.GONE);
             }
         });
@@ -74,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         int id = item.getItemId();
         if (isLoggedIn) {
             if (id == R.id.profile_icon) {
