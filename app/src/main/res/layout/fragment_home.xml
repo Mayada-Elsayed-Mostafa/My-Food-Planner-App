@@ -10,11 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="vertical"
         android:weightSum="4">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,12 +23,11 @@
 
             <TextView
                 android:id="@+id/tv_title_inspirationMeal"
-                style="@style/TitleTextStyle"
+                style="@style/BigTitleTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:text="@string/handpickedForYou"
-                android:textColor="@color/black" />
+                android:text="@string/handpickedForYou" />
 
             <View
                 android:id="@+id/view1"
@@ -63,7 +61,7 @@
 
                 <TextView
                     android:id="@+id/tv_title_categories_available_list"
-                    style="@style/TitleTextStyle"
+                    style="@style/BigTitleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_4sdp"
@@ -102,7 +100,7 @@
 
                 <TextView
                     android:id="@+id/tv_title_countries_available_list"
-                    style="@style/TitleTextStyle"
+                    style="@style/BigTitleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_4sdp"
@@ -142,7 +140,7 @@
 
                 <TextView
                     android:id="@+id/tv_title_ingredients_available_list"
-                    style="@style/TitleTextStyle"
+                    style="@style/BigTitleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_4sdp"

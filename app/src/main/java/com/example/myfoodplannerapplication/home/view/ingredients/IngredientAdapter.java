@@ -43,7 +43,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
         Ingredient ingredient = ingredients.get(position);
 
-        holder.categoryName.setText(ingredient.getStrIngredient());
+        holder.ingredientName.setText(ingredient.getStrIngredient());
         Glide.with(holder.itemView.getContext())
                 .load("https://www.themealdb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png")
                 .into(holder.ingredientImg);
@@ -57,19 +57,15 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ingredientImg;
-        TextView categoryName;
+        TextView ingredientName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ingredientImg = itemView.findViewById(R.id.iv_category_img);
-            categoryName = itemView.findViewById(R.id.tv_category_name);
+            ingredientName = itemView.findViewById(R.id.tv_category_name);
 
         }
     }
 
-    public void updateList(List<Ingredient> newList) {
-        this.ingredients = newList;
-        notifyDataSetChanged();
-    }
 }

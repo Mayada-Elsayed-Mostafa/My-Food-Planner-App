@@ -81,7 +81,7 @@
             android:id="@+id/iv_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_400sdp"
-            android:src="@drawable/search_engines_cuate" />
+            android:src="@drawable/search_engine" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_results"

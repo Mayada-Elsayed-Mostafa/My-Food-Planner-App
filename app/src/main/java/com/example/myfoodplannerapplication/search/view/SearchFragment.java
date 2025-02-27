@@ -81,6 +81,17 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchClic
         rvCountryAdapter = new RVCountryAdapter(getContext(), new ArrayList<>(), this);
         rvIngredientAdapter = new RVIngredientAdapter(getContext(), new ArrayList<>(), this);
 
+        if (categoryChip.isChecked()) {
+            countryChip.setChecked(false);
+            ingredientChip.setChecked(false);
+        } else if (countryChip.isChecked()) {
+            categoryChip.setChecked(false);
+            ingredientChip.setChecked(false);
+        } else if (ingredientChip.isChecked()) {
+            categoryChip.setChecked(false);
+            countryChip.setChecked(false);
+        }
+
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
