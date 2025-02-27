@@ -134,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_45sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:text="@string/donothaveanAccount"
+        android:text="@string/doNotHaveAnAccount"
         android:textSize="@dimen/_13sdp"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/tv_or" />

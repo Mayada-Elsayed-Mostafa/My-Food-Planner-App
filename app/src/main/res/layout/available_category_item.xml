@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_130sdp"
-    android:layout_height="@dimen/_130sdp"
-    android:layout_margin="@dimen/_6sdp"
-    android:clipChildren="false"
-    app:cardCornerRadius="@dimen/_4sdp"
-    android:clipToPadding="false"
-    app:cardElevation="@dimen/_3sdp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_6sdp"
+    tools:context=".home.view.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/_6sdp"
+        android:background="@drawable/rounded_shadow_background"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_category_img"
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_100sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_category_name"
+            app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CircularShapeAppearance"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/tv_category_name"
-            style="@style/TitleTextStyle"
-            android:layout_width="wrap_content"
-            android:textColor="@color/my_light_tertiary"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_category_img" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tv_category_name"
+        style="@style/TitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Category Name"
+        android:textColor="@color/my_light_tertiary"
+        app:layout_constraintEnd_toEndOf="@id/frame"
+        app:layout_constraintStart_toStartOf="@id/frame"
+        app:layout_constraintTop_toBottomOf="@id/frame" />
+</androidx.constraintlayout.widget.ConstraintLayout>

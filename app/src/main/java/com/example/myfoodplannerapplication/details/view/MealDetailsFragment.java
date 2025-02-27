@@ -53,16 +53,21 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_details, container, false);
 
-        initializeViews(view);
-        initializePreferences();
+        addToFav = view.findViewById(R.id.add_to_fav);
+        addToCalendar = view.findViewById(R.id.add_to_calendar);
+        mealNameTV = view.findViewById(R.id.tv_meal_name_in_details);
+        mealInstructionsTV = view.findViewById(R.id.tv_meal_instructions_in_details);
+        mealIMG = view.findViewById(R.id.img_meal_in_details);
+        mealAreaTV = view.findViewById(R.id.tv_area);
+        mealCategoryTV = view.findViewById(R.id.tv_category);
+        webView = view.findViewById(R.id.wv_video);
+
+        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+
         initializeMealDetails();
 
         return view;
-    }
-
-    private void initializePreferences() {
-        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
-        isLoggedIn = preferences.getBoolean("isLoggedIn", false);
     }
 
     private void initializeMealDetails() {
@@ -73,46 +78,31 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
 
         if (id.isEmpty()) {
             meal = MealDetailsFragmentArgs.fromBundle(getArguments()).getMeal();
-            setMealDetails();
+            String mealName = meal.getStrMeal();
+            String mealInstructions = meal.getStrInstructions();
+            String mealImage = meal.getStrMealThumb();
+            String mealCountry = meal.getStrArea();
+            String mealCategory = meal.getStrCategory();
+            String mealVideo = meal.getStrYoutube();
+
+            mealNameTV.setText(mealName);
+            mealAreaTV.setText(mealCountry);
+            mealCategoryTV.setText(mealCategory);
+            mealInstructionsTV.setText(mealInstructions);
+            Glide.with(requireContext()).load(mealImage).into(mealIMG);
+            loadYouTubeVideo(mealVideo);
+
+            setupAddToFavButton();
+            setupAddToCalendarButton();
         } else {
             mealDetailsImp.getMealById(id);
         }
     }
 
-    private void initializeViews(View view) {
-        addToFav = view.findViewById(R.id.add_to_fav);
-        addToCalendar = view.findViewById(R.id.add_to_calendar);
-        mealNameTV = view.findViewById(R.id.tv_meal_name_in_details);
-        mealInstructionsTV = view.findViewById(R.id.tv_meal_instructions_in_details);
-        mealIMG = view.findViewById(R.id.img_meal_in_details);
-        mealAreaTV = view.findViewById(R.id.tv_area);
-        mealCategoryTV = view.findViewById(R.id.tv_category);
-        webView = view.findViewById(R.id.wv_video);
-    }
-
-    private void setMealDetails() {
-        String mealName = meal.getStrMeal();
-        String mealInstructions = meal.getStrInstructions();
-        String mealImage = meal.getStrMealThumb();
-        String mealCountry = meal.getStrArea();
-        String mealCategory = meal.getStrCategory();
-        String mealVideo = meal.getStrYoutube();
-
-        mealNameTV.setText(mealName);
-        mealAreaTV.setText(mealCountry);
-        mealCategoryTV.setText(mealCategory);
-        mealInstructionsTV.setText(mealInstructions);
-        Glide.with(requireContext()).load(mealImage).into(mealIMG);
-        loadYouTubeVideo(mealVideo);
-
-        setupAddToFavButton();
-        setupAddToCalendarButton();
-    }
-
     private void setupAddToFavButton() {
         addToFav.setOnClickListener(v -> {
             if (isLoggedIn) {
-                addToFav.setImageResource(R.drawable.bookmark_added);
+                addToFav.setImageResource(R.drawable.added_to_fav);
                 onAddFavMealDetailsClicked(meal);
             }
         });
@@ -139,7 +129,7 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
 
                     MealLocalDataSource.getInstance(getContext()).insertToWeeklyPlan(weekMeal);
                     Snackbar.make(getView(), "Done", Snackbar.LENGTH_LONG).show();
-                    addToCalendar.setImageResource(R.drawable.calendar_added);
+                    addToCalendar.setImageResource(R.drawable.added_to_calendar);
                 },
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
@@ -172,6 +162,21 @@ public class MealDetailsFragment extends Fragment implements OnMealDetailsClickL
 
     public void displayMeal(InspirationMeal _meal) {
         this.meal = _meal;
-        setMealDetails();
+        String mealName = meal.getStrMeal();
+        String mealInstructions = meal.getStrInstructions();
+        String mealImage = meal.getStrMealThumb();
+        String mealCountry = meal.getStrArea();
+        String mealCategory = meal.getStrCategory();
+        String mealVideo = meal.getStrYoutube();
+
+        mealNameTV.setText(mealName);
+        mealAreaTV.setText(mealCountry);
+        mealCategoryTV.setText(mealCategory);
+        mealInstructionsTV.setText(mealInstructions);
+        Glide.with(requireContext()).load(mealImage).into(mealIMG);
+        loadYouTubeVideo(mealVideo);
+
+        setupAddToFavButton();
+        setupAddToCalendarButton();
     }
 }

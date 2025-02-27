@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#F8FAFD</color>
+    <color name="black">#1C1C1C</color>
+    <color name="white">#FFFFFF</color>
 
-    <color name="my_light_primary">#5A86E3</color>
-    <color name="my_light_secondary">#6F7C91</color>
-    <color name="my_light_tertiary">#9B6BAE</color>
+    <color name="my_light_primary">#FF5722</color>
+    <color name="my_light_secondary">#FF9800</color>
+    <color name="my_light_tertiary">#8BC34A</color>
 
-    <color name="my_light_primary_container">#d6e3ff</color>
-    <color name="my_light_secondary_container">#dae2f9</color>
-    <color name="my_light_tertiary_container">#fad8fd</color>
+    <color name="my_light_primary_container">#FFEBEE</color>
+    <color name="my_light_secondary_container">#FFF3E0</color>
+    <color name="my_light_tertiary_container">#E8F5E9</color>
 
     <color name="accent_orange">#FFA07A</color>
     <color name="accent_green">#76C7C0</color>
     <color name="accent_yellow">#FFD700</color>
-
 </resources>

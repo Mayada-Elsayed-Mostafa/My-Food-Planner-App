@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,8 @@ public class ProfileFragment extends Fragment {
     SharedPreferences preferences;
     Button logout, seePlan, seeFav;
     TextView userName;
+    Boolean isLoggedIn;
+    ImageView loginFirst;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -36,11 +39,19 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+
         logout = view.findViewById(R.id.btn_logout);
         seePlan = view.findViewById(R.id.btn_see_plan);
         seeFav = view.findViewById(R.id.btn_see_fav);
         userName = view.findViewById(R.id.tv_userNameProfile);
+        loginFirst = view.findViewById(R.id.no_connect_iv);
 
+        if (!isLoggedIn) {
+            loginFirst.setVisibility(View.VISIBLE);
+        } else {
+            loginFirst.setVisibility(View.GONE);
+        }
 
         userName.setText(preferences.getString("name", ""));
 
@@ -51,7 +62,6 @@ public class ProfileFragment extends Fragment {
             editor.apply();
 
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_welcomeFragment);
-
         });
 
         seePlan.setOnClickListener(v -> {
@@ -62,7 +72,7 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_favoriteFragment);
         });
 
-
         return view;
     }
+
 }

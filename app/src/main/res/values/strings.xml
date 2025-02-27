@@ -7,7 +7,7 @@
     <string name="forgotPassword">"Forgot Password ? "</string>
     <string name="login">Log In</string>
     <string name="or">OR</string>
-    <string name="donothaveanAccount">"Don’t have an Account? "</string>
+    <string name="doNotHaveAnAccount">"Don’t have an Account? "</string>
     <string name="createAccount">Create Account</string>
     <string name="register">Register</string>
     <string name="createYourNewAccount">Create your new account</string>
@@ -20,21 +20,21 @@
     <string name="mayYummy">MayYummy</string>
     <string name="solgan">MayYummy – Your smart meal planner.\nPlan your meals, enjoy every bite</string>
     <string name="haveAnAccount">Already have an account?</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="handpickedforYou">Handpicked for You</string>
+    <string name="handpickedForYou">Handpicked for You😊</string>
     <string name="skip">Skip</string>
     <string name="logout">Logout</string>
     <string name="seeYourFavouritesMeals">See Your Favourites Meals</string>
     <string name="see">See</string>
     <string name="seeYourPlanMeals">See Your Plan Meals</string>
-    <string name="searchbyingredients">Ingredients</string>
-    <string name="searchbycategories">Categories</string>
-    <string name="searchbycountry">Countries</string>
+    <string name="searchByIngredients">Ingredients</string>
+    <string name="searchByCategories">Categories</string>
+    <string name="searchByCountry">Countries</string>
     <string name="ingredients">Ingredients</string>
     <string name="countries">Countries</string>
     <string name="categories">Categories</string>
-    <string name="search">Search...</string>
+    <string name="search">Search</string>
     <string name="remove">Remove</string>
     <string name="backup_your_data">Backup your Data</string>
     <string name="restore_your_data">Restore your Data</string>
@@ -42,4 +42,5 @@
     <string name="favorites">Favorites</string>
     <string name="calender">Calender</string>
     <string name="home">Home</string>
+    <string name="most_popular_categories">Most Popular Categories</string>
 </resources>
