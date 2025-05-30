@@ -1,15 +1,14 @@
 package com.example.myfoodplannerapplication.home.view.country;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfoodplannerapplication.R;
+import com.example.myfoodplannerapplication.databinding.CountryItemBinding;
 import com.example.myfoodplannerapplication.model.Country;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
         this.countries = _countries;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setList(List<Country> countryList) {
         this.countries = countryList;
         notifyDataSetChanged();
@@ -33,8 +33,9 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.country_item, parent, false);
-        return new RVCountriesAdapter.ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        CountryItemBinding binding = CountryItemBinding.inflate(inflater, parent, false);
+        return new RVCountriesAdapter.ViewHolder(binding);
     }
 
     @Override
@@ -42,23 +43,21 @@ public class RVCountriesAdapter extends RecyclerView.Adapter<RVCountriesAdapter.
 
         Country country = countries.get(position);
 
-        holder.countryName.setText(country.getStrArea());
+        holder.binding.tvCountryName.setText(country.getStrArea());
     }
 
     @Override
     public int getItemCount() {
-        return countries.size();
+        return countries != null ? countries.size() : 0;
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView countryName;
+        CountryItemBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            countryName = itemView.findViewById(R.id.tv_country_name);
-
+        public ViewHolder(@NonNull CountryItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
+
 }

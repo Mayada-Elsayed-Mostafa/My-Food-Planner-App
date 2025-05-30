@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,12 +17,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.airbnb.lottie.LottieAnimationView;
+import com.example.myfoodplannerapplication.databinding.FragmentSplashBinding;
 
 public class SplashFragment extends Fragment {
 
-    SharedPreferences preferences;
     private static final int SPLASH_DELAY = 3000;
+    SharedPreferences preferences;
+    private FragmentSplashBinding binding;
 
     public SplashFragment() {
         // Required empty public constructor
@@ -32,37 +32,41 @@ public class SplashFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_splash, container, false);
 
-        LottieAnimationView lottieAnimationView = view.findViewById(R.id.lottie_splash);
-        lottieAnimationView.setAnimation(R.raw.splash_animation);
-        lottieAnimationView.playAnimation();
+        binding = FragmentSplashBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        TextView title = view.findViewById(R.id.title);
+        binding.lottieSplash.setAnimation(R.raw.splash_animation);
+        binding.lottieSplash.playAnimation();
 
-        title.post(() -> {
-            LinearGradient gradient = new LinearGradient(0, 0, 0, title.getHeight(),
-                    ContextCompat.getColor(getContext(), R.color.my_light_primary),
-                    ContextCompat.getColor(getContext(), R.color.my_light_tertiary),
-                    Shader.TileMode.CLAMP);
-
-            title.getPaint().setShader(gradient);
-
-            title.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            title.setShadowLayer(8, 0, 0, ContextCompat.getColor(getContext(), R.color.accent_yellow)); // تأثير توهج أصفر
+        binding.title.post(() -> {
+            LinearGradient gradient = new LinearGradient(0, 0, 0, binding.title.getHeight(), ContextCompat.getColor(getContext(), R.color.my_light_primary), ContextCompat.getColor(getContext(), R.color.my_light_tertiary), Shader.TileMode.CLAMP);
+            binding.title.getPaint().setShader(gradient);
+            binding.title.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            binding.title.setShadowLayer(8, 0, 0, ContextCompat.getColor(getContext(), R.color.accent_yellow));
         });
 
-        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        preferences = requireActivity().getSharedPreferences("userData", MODE_PRIVATE);
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
-            new Handler().postDelayed(() ->
-                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_homeFragment), SPLASH_DELAY);
+            new Handler().postDelayed(() -> Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_homeFragment), SPLASH_DELAY);
         } else {
-            new Handler().postDelayed(() ->
-                    Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment), SPLASH_DELAY);
+            new Handler().postDelayed(() -> Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_welcomeFragment), SPLASH_DELAY);
         }
 
-        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

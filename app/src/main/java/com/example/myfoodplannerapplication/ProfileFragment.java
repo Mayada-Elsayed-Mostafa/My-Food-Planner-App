@@ -7,55 +7,49 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import com.example.myfoodplannerapplication.databinding.FragmentProfileBinding;
 
 
 public class ProfileFragment extends Fragment {
 
     SharedPreferences preferences;
-    Button logout, seePlan, seeFav;
-    TextView userName;
     Boolean isLoggedIn;
-    ImageView loginFirst;
+    private FragmentProfileBinding binding;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        return binding.getRoot();
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        preferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+        preferences = requireActivity().getSharedPreferences("userData", MODE_PRIVATE);
         isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
-        logout = view.findViewById(R.id.btn_logout);
-        seePlan = view.findViewById(R.id.btn_see_plan);
-        seeFav = view.findViewById(R.id.btn_see_fav);
-        userName = view.findViewById(R.id.tv_userNameProfile);
-        loginFirst = view.findViewById(R.id.no_connect_iv);
-
         if (!isLoggedIn) {
-            loginFirst.setVisibility(View.VISIBLE);
+            binding.noConnectIv.setVisibility(View.VISIBLE);
         } else {
-            loginFirst.setVisibility(View.GONE);
+            binding.noConnectIv.setVisibility(View.GONE);
         }
 
-        userName.setText(preferences.getString("name", ""));
+        binding.tvUserNameProfile.setText(preferences.getString("name", ""));
 
-        logout.setOnClickListener(v -> {
+        binding.btnLogout.setOnClickListener(v -> {
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove("email");
             editor.remove("isLoggedIn");
@@ -64,15 +58,19 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_welcomeFragment);
         });
 
-        seePlan.setOnClickListener(v -> {
+        binding.btnSeePlan.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_calenderFragment);
         });
 
-        seeFav.setOnClickListener(v -> {
+        binding.btnSeeFav.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_favoriteFragment);
         });
 
-        return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }
